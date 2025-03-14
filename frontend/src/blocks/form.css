@@ -1,0 +1,78 @@
+
+.form {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+  height: 60vh;
+  max-width: 260px;
+}
+
+.form__title {
+  text-align: center;
+  font-size: 1.2em;
+  padding-bottom: 1em;
+}
+
+.form__set{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5em;
+  gap: 2em;
+  width: 100%;
+}
+
+.form__input {
+  box-sizing: border-box;
+  background: none;
+  border: none;
+  border-bottom: 1px solid white;
+  padding-bottom: 0.3em;
+  width: 100%;
+  color: white;
+}
+
+.form__button {
+  background-color: white;
+  color: black;
+  height: 46px;
+  border-radius: 2px;
+  margin: auto;
+  border: none;
+  width: 100%;
+}
+
+.form__text-container {
+  display: flex;
+}
+.form__text {
+  font-size: .9em;
+  color: rgb(149, 149, 149);
+  margin-right: 8px;
+
+}
+
+.form__link {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  font-size: .9em;
+}
+
+.form__container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 9em;
+  gap: 1.5em;
+  width: 100%;
+}
+
+.form__input-confirm-password {
+  display: none;
+  position: absolute;
+}

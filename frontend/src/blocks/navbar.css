@@ -1,0 +1,138 @@
+
+.navbar-mobile{
+  display: block;
+  height: 0;
+  width: 100%;
+  border-bottom: none;
+  overflow: hidden;
+  transition:  0.3s ease;
+  position: relative;
+
+}
+.navbar__container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+
+.navbar__links{
+  display: flex;
+  list-style-type: none;
+  flex-direction: column;
+
+}
+.navbar__link{
+  margin: 0;
+
+}
+.navbar_open {
+  height: 130px;
+  border-bottom: 1px solid #555;
+  overflow: visible;
+}
+
+
+
+.header__text-container {
+  position: relative;
+}
+
+.navbar-desktop{
+  display: none;
+  width: 100%;
+}
+
+
+.navbar__button-close{
+  position: absolute;
+  display: none;
+  left: -3px;
+  top: -3px;
+  /* bottom: -53%;
+  right: 10%;
+  z-index: 1000; */
+}
+.navbar__mobile-button {
+  background: url(../../public/icons/hamburger.svg);
+  width: 18px;
+  height: 16px;
+  border: none;
+  filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+  transition: 0.3s;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+
+}
+
+.button__animation_open {
+  display: block;
+  animation: fadeInWhileSpin 0.5s forwards;
+}
+
+.button__animation_close {
+  animation: fadeOutWhileSpin 0.5s forwards;
+  /* animation-fill-mode: forwards; */
+}
+
+@keyframes fadeInWhileSpin {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(180deg);
+  }
+
+}
+
+@keyframes fadeOutWhileSpin{
+  0% {
+    opacity: 1;
+    transform: rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(360deg);
+  }
+
+}
+
+@media screen and (min-width: 470px) {
+  .navbar-desktop{
+    display: none;
+  }
+
+  .navbar-mobile {
+    border-bottom: 1px solid #555;
+  }
+
+
+  .navbar__mobile-button {
+    display: none;
+    top: 24%;
+    left: 87%;
+  }
+}
+
+
+@media screen and (min-width: 470px) {
+  .navbar-desktop{
+    display: block;
+  }
+
+  .navbar-mobile {
+    border-bottom: none;
+    display: none;
+  }
+
+  .navbar__container {
+    display: flex;
+    flex-direction: row;
+  }
+
+}

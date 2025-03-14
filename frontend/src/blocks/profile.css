@@ -1,0 +1,143 @@
+.profile {
+  width: 96%;
+  display: flex;
+  max-width: 880px;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 2.4em;
+  margin: auto;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.profile__container {
+  display: flex;
+  position: relative;
+  margin: auto auto 1.6rem;
+}
+
+.profile__avatar {
+  display: block;
+  margin: auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-size: cover;
+  object-fit: cover;
+}
+
+.profile__overlay {
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s ease;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.profile__container:hover .profile__overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.profile__container:hover .button_edit-avatar {
+  display: block;
+}
+
+.profile__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 2.25em;
+  width: 80%;
+}
+
+.profile__info-container {
+  width: 282px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding-bottom: 14px;
+}
+
+.profile__name {
+  font-weight: 400;
+  font-size: 1.3em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 80%;
+}
+
+.profile__job {
+  font-weight: 400;
+  font-size: 1em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 80%;
+}
+
+@media screen and (min-width: 400px) {
+  .profile__info {
+    align-items: flex-start;
+    width: 63%;
+  }
+
+  .profile__info-container {
+    justify-content: flex-start;
+    padding: 0;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .porfile {
+    width: 95%;
+  }
+  .profile__info {
+    align-items: flex-start;
+    width: 50%;
+  }
+
+  .profile__name {
+    font-size: 1.7em;
+  }
+
+  .profile__job {
+    font-size: 1.1em;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .profile {
+    width: 95%;
+  }
+
+  .profile__info {
+    width: 58%;
+  }
+
+  .profile__info-container {
+    width: 100%;
+  }
+
+  .profile__name {
+    font-size: 2.6em;
+  }
+
+  .profile__job {
+    font-size: 1.1em;
+  }
+}
+
+@media screen and (min-width: 880px) {
+
+  .profile__avatar {
+    margin: 0 1.8em 0 0;
+  }
+
+  .profile__info {
+    width: 64%;
+    padding: 0;
+  }
+}

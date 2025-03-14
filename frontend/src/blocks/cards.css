@@ -1,0 +1,60 @@
+.cards {
+  width: 100%;
+  padding-top: 2.25em;
+  display: flex;
+  padding-bottom: 4em;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.card {
+  width: 282px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 11px;
+  height: 361px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.card__image {
+  width: 288px;
+  height: 288px;
+  background-color: #000;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.card__info {
+  width: 85%;
+  display: flex;
+  flex-direction: row;
+  height: 73px;
+  margin: auto;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card__title {
+  width: 100%;
+  color: black;
+  font-weight: 900;
+  font-size: 1.5em;
+  line-height: 1.2em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card__likes {
+}
+
+.card__counter {
+  color: #000;
+  text-align: center;
+  font-size: 1em;
+}

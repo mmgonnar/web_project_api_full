@@ -1,0 +1,8 @@
+.login {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  height: 75vh;
+  margin: auto;
+  padding-top: 2.25em;
+}

@@ -1,0 +1,86 @@
+.header {
+  display: flex;
+  width: 100%;
+  max-width: 880px;
+  border-bottom: 1px solid #555;
+  margin: auto;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 1%;
+  padding-bottom: 20px;
+
+
+}
+
+.header__container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 5%;
+}
+.header__logo {
+  width: 20%;
+  height: auto;
+  margin-left: 28px;
+  padding-top: 5%;
+  width: clamp(120px, 1vw, 170px);
+}
+
+.header__text-container {
+  gap: .5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-right: 28px;
+  align-content: flex-end;
+}
+
+.header__text {
+  font-size: max(1em, min(1.5vw, 1.2em));
+  text-decoration: none;
+  color: rgb(149, 149, 149);
+  padding-top: 10px;
+  background: none;
+  border: none;
+  margin-right: 5px;
+}
+
+.header__icon-logout {
+  width: 16px;
+  background: url(../../public/icons/sign_out.svg);
+  height: 19px;
+  border: none;
+  filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+  transition: 0.3s;
+}
+
+.header__text-email {
+  color: white;
+  padding-right: 10px;
+}
+
+
+@media screen and (min-width: 400px) {
+  /* .header {
+    padding: 0;
+  } */
+  /* .header__logo {
+    width: 170px;
+
+  } */
+
+
+}
+
+
+/* @media screen and (max-width: 768px) {
+  .header {
+    margin-bottom: 38px;
+    padding: 28px 0 32px 0;
+  }
+    .header__logo {
+        width: 126px;
+    }
+} */

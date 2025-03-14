@@ -1,0 +1,130 @@
+.button {
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.6;
+}
+
+.button_edit {
+  background: url(../../public/icons/edit_button.svg) no-repeat center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #fff;
+}
+
+.button_edit-avatar {
+  background: url(../../public/icons/edit_avatar_button.svg);
+  transition: 0.3s;
+  width: 26px;
+  height: 26px;
+  border: none;
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  z-index: 1;
+  display: none;
+}
+
+.button_edit-avatar:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+.button_add {
+  background: url(../../public/icons/add_button.svg) no-repeat center;
+  width: 288px;
+  height: 50px;
+  border-radius: 2px;
+  border: 1px solid #fff;
+}
+
+.button_like {
+  background: url(../../public/icons/like.svg) no-repeat center;
+  width: 21px;
+  height: 19px;
+  display: flex;
+  align-items: center;
+  border: none;
+  transition: 0.3s;
+}
+
+.button_like.liked {
+  background: url(../../public/icons/like-black.svg);
+  opacity: 1;
+}
+
+.button_like:hover {
+  transform: scale(1.2);
+}
+
+.button_close {
+  background: url(../../public/icons/close_button.svg) no-repeat center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  rotate: 90deg;
+  transform: rotate(90deg);
+  position: absolute;
+  bottom: 105%;
+  left: 92%;
+}
+
+.button_submit {
+  background-color: #000;
+  color: #fff;
+  width: 238px;
+  height: 46px;
+  border-radius: 2px;
+  margin: auto;
+  border: none;
+}
+
+.button_submit-disabled {
+  border: 1px solid #cccccc;
+  opacity: 0.5;
+  cursor: default;
+  background: white;
+  color: #cccccc;
+}
+
+.button_delete {
+  background: url(../../public/icons/trash_button.svg);
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  width: 18px;
+  height: 19px;
+  border: none;
+  filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+  transition: 0.3s;
+}
+
+.button_delete:hover {
+  transform: scale(1.2);
+}
+
+.button_link {
+  text-decoration: none;
+  color: rgba(84, 84, 84, 1);
+  cursor: pointer;
+}
+
+@media screen and (min-width: 600px) {
+  .button_add {
+    width: 150px;
+    height: 50px;
+  }
+
+  .button_close {
+    left: 100%;
+    bottom: 103%;
+  }
+}
+
+@media screen and (min-width: 880px) {
+  .button_edit-avatar {
+    top: 40%;
+    left: 32%;
+  }
+}
