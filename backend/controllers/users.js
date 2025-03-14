@@ -31,6 +31,8 @@ const createUser = async (req, res) => {
     name,
     about,
     avatar,
+    email,
+    password,
   });
   try {
     const savedUser = await newUser.save();
