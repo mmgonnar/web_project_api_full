@@ -6,11 +6,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     maxlength: 30,
+    default: "Mariela Gonzalez",
   },
   about: {
     type: String,
     minlength: 2,
     maxlength: 30,
+    default: "Junior Web Developer",
   },
   avatar: {
     type: String,
@@ -20,6 +22,8 @@ const userSchema = new mongoose.Schema({
       },
       message: "Invalid url",
     },
+    default:
+      "https://i.pinimg.com/736x/b5/49/41/b5494197b2d462c940f88988b203d290.jpg",
   },
   email: {
     type: String,
@@ -35,6 +39,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     require: true,
+    select: false,
   },
 });
 
