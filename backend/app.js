@@ -1,7 +1,11 @@
+//import login from "./controllers/login";
+const { login, createUser } = require("./controllers/users");
+
 const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./routes/users");
 const cardRoutes = require("./routes/cards");
+const authRoutes = require("./routes/auth");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -42,6 +46,9 @@ app.get("/", (req, res) => {
   console.log("Received a request at the root endpoint.");
   res.sendStatus(200);
 });
+
+//auth routes
+app.post("/", authRoutes);
 
 app.use("/", userRoutes); //users
 app.use("/", cardRoutes); // cards

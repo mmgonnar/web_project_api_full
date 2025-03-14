@@ -48,7 +48,7 @@ const createUser = async (req, res) => {
       });
       return newUser;
     })
-    .then(async () => {
+    .then(async (newUser) => {
       const savedUser = await newUser.save();
       res.status(201).json(savedUser);
     })
