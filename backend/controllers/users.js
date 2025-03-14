@@ -28,19 +28,40 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
   const { name, about, avatar, email, password } = req.body;
-  const newUser = new User({
-    name,
-    about,
-    avatar,
-    email,
-    password,
-  });
-  try {
-    const savedUser = await newUser.save();
-    res.status(201).json(savedUser);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  // const newUser = new User({
+  //   name,
+  //   about,
+  //   avatar,
+  //   email,
+  //   password,
+  // });
+
+  bcrypt
+    .hash(password, 10)
+    .then((hash) => {
+      const newUser = new User({
+        name,
+        about,
+        avatar,
+        email,
+        password: hash,
+      });
+      return newUser;
+    })
+    .then(async () => {
+      const savedUser = await newUser.save();
+      res.status(201).json(savedUser);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.message });
+    });
+
+  // try {
+  //   // const savedUser = await newUser.save();
+  //   // res.status(201).json(savedUser);
+  // } catch (err) {
+  //   res.status(500).json({ message: err.message });
+  // }
 };
 
 const updateUser = async (req, res) => {
