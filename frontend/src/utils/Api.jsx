@@ -102,7 +102,7 @@ class Api {
 }
 
 const api = new Api({
-  address: "https://around.nomoreparties.co/v1/web_es_11",
+  address: "http://around.nomoreparties.co/v1/web_es_11",
   groupId: `cohort11`,
   token: `728c172f-3008-42b7-a44c-cc238ba60a2f`,
 });
