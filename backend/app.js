@@ -27,7 +27,7 @@ mongoose.connect(DATABASE_URL).then(() => {
 
 //Cors Middleware
 app.use(cors(settings));
-app.use(auth);
+//app.use(auth);
 //Middleware to parse JSON
 app.use(express.json());
 //Middleware to get info
@@ -50,8 +50,8 @@ app.get("/", (req, res) => {
 });
 
 //auth routes
-app.post("/", authRoutes);
-
+app.use("/", authRoutes);
+app.use(auth);
 app.use("/", userRoutes); //users
 app.use("/", cardRoutes); // cards
 

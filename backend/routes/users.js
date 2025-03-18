@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/auth.js");
+//const auth = require("../middleware/auth.js");
 
 const {
   getUsers,
@@ -15,6 +15,6 @@ router.get("/users/:userId", getUserById);
 //router.post("/users", createUser);
 router.patch("/users/me", updateUser);
 router.patch("/users/avatar", updateAvatar);
-router.get("/users/me", auth, getUserById);
+router.get("/users/me", getUserById);
 
 module.exports = router;

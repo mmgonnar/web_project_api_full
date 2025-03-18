@@ -11,7 +11,6 @@ const getCards = async (req, res) => {
 };
 
 const getCardById = async (req, res) => {
-  console.log(req.params);
   try {
     const card = await Card.findById(req.params.cardsId)
       .populate("owner")
@@ -43,17 +42,27 @@ const createCard = async (req, res) => {
 };
 
 const deleteCard = async (req, res) => {
-  try {
-    const card = await Card.findByIdAndDelete(req.params.cardId).orFail(
-      new Error("document not found")
-    );
-    if (!card) {
-      return res.status(404).json({ message: "Card not found" });
-    }
-    res.json({ message: "Card deleted" });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  await Card.findByIdAndDelete(req.params.cardId)
+    .then((card) => {
+      if (!card.owner.equals(req.user._id)) {
+        return res.status(403).send({ message: "You can't delete this cards" });
+      }
+      return Card.findByIdAndDelete(req.params.cardID);
+    })
+    .then(() => {
+      res.send({ message: "Card deleted" });
+    });
+  //.orFail(
+  // try {
+  //     new Error("document not found")
+  //   );
+  //   if (!card) {
+  //     return res.status(404).json({ message: "Card not found" });
+  //   }
+  //   res.json({ message: "Card deleted" });
+  // } catch (err) {
+  //   res.status(500).json({ message: err.message });
+  // }
 };
 
 const addLike = async (req, res) => {
