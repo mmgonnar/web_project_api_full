@@ -12,9 +12,8 @@ const getUsers = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-  console.log("GET /users/" + req.params.userId);
   try {
-    const user = await User.findById(req.params.userId).orFail(
+    const user = await User.findById(req.user._id).orFail(
       new Error("No user with that id has been found.")
     );
     if (!user) {
