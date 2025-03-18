@@ -6,6 +6,7 @@ const cors = require("cors");
 const userRoutes = require("./routes/users");
 const cardRoutes = require("./routes/cards");
 const authRoutes = require("./routes/auth");
+const auth = require("./middleware/auth");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -26,6 +27,7 @@ mongoose.connect(DATABASE_URL).then(() => {
 
 //Cors Middleware
 app.use(cors(settings));
+app.use(auth);
 //Middleware to parse JSON
 app.use(express.json());
 //Middleware to get info
@@ -33,13 +35,13 @@ app.use((req, res, next) => {
   console.log(`${new Date().toLocaleString()}, ${req.method}, ${req.url}`);
   next();
 });
-app.use((req, res, next) => {
-  req.user = {
-    _id: "67ae6a939bdd5642eb30c371",
-  };
+// app.use((req, res, next) => {
+//   req.user = {
+//     _id: "67ae6a939bdd5642eb30c371",
+//   };
 
-  next();
-});
+//   next();
+// });
 
 //root
 app.get("/", (req, res) => {
