@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
+const card = require("../models/card");
 
 const getUsers = async (req, res) => {
   console.log("get users");
@@ -27,13 +28,6 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
   const { name, about, avatar, email, password } = req.body;
-  // const newUser = new User({
-  //   name,
-  //   about,
-  //   avatar,
-  //   email,
-  //   password,
-  // });
 
   bcrypt
     .hash(password, 10)
@@ -49,18 +43,18 @@ const createUser = async (req, res) => {
     })
     .then(async (newUser) => {
       const savedUser = await newUser.save();
+      const defaultCard = new card({
+        title: "Welcome!",
+        link: "https://www.pushengage.com/wp-content/uploads/2022/02/Best-Website-Welcome-Message-Examples.png",
+        owner: savedUser._id,
+      });
+
+      await defaultCard.save();
       res.status(201).json(savedUser);
     })
     .catch((err) => {
       res.status(500).json({ message: err.message });
     });
-
-  // try {
-  //   // const savedUser = await newUser.save();
-  //   // res.status(201).json(savedUser);
-  // } catch (err) {
-  //   res.status(500).json({ message: err.message });
-  // }
 };
 
 const updateUser = async (req, res) => {
