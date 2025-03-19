@@ -51,7 +51,7 @@ function App() {
       .getUserInfo()
       .then((userData) => {
         setIsLoggedIn(true);
-        //setUserData(userData.email);
+        setUserEmail(userData.email);
         setCurrentUser(userData);
       })
       .catch(console.error)
@@ -71,22 +71,22 @@ function App() {
     if (isLoggedIn) {
       fetchData();
     }
-    const getUserEmail = async () => {
-      try {
-        const data = await auth.getUserEmail();
-        if (data) {
-          setUserEmail(data.data.email);
-        } else {
-          setErrorMessage("User does not exist");
-        }
-      } catch (err) {
-        console.error(err);
-        setErrorMessage("Error getting data");
-      } finally {
-        setIsLoading(false); // XXXXXXXXXXXXX
-      }
-    };
-    getUserEmail();
+    // const getUserEmail = async () => {
+    //   try {
+    //     const data = await auth.getUserEmail();
+    //     if (data) {
+    //       setUserEmail(data.data.email);
+    //     } else {
+    //       setErrorMessage("User does not exist");
+    //     }
+    //   } catch (err) {
+    //     console.error(err);
+    //     setErrorMessage("Error getting data");
+    //   } finally {
+    //     setIsLoading(false); // XXXXXXXXXXXXX
+    //   }
+    // };
+    // getUserEmail();
   }, [isLoggedIn]);
 
   const handleCardLike = async (card) => {

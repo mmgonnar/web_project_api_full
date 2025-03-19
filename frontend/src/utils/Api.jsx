@@ -9,13 +9,6 @@ class Api {
     localStorage.setItem("token", token);
   }
 
-  // _getHeaders() {
-  //   return {
-  //     Authorization: this._token,
-  //     "Content-Type": "application/json",
-  //   };
-  // }
-
   getUserInfo() {
     return fetch(this._url + "/users/me", {
       headers: {
@@ -114,7 +107,7 @@ class Api {
 }
 
 const api = new Api({
-  address: "http://localhost:3001",
+  address: "http://localhost:3000",
 });
 
 export default api;

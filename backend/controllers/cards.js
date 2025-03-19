@@ -2,8 +2,10 @@ const Card = require("../models/card");
 
 const getCards = async (req, res) => {
   try {
-    const cards = await Card.find().populate("owner").populate("likes");
-    orFail(new Error("document not found"));
+    const cards = await Card.find()
+      .populate("owner")
+      .populate("likes")
+      .orFail(new Error("document not found"));
     res.json(cards);
   } catch (err) {
     res.status(500).json({ message: err.message });
