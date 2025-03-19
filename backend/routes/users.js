@@ -8,6 +8,7 @@ const {
   createUser,
   updateUser,
   updateAvatar,
+  deleteUser,
 } = require("../controllers/users");
 
 router.get("/users", getUsers);
@@ -16,5 +17,6 @@ router.get("/users/:userId", getUserById);
 router.patch("/users/me", updateUser);
 router.patch("/users/avatar", updateAvatar);
 router.get("/users/me", getUserById);
+router.delete("/users/me", deleteUser);
 
 module.exports = router;
