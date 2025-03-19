@@ -15,18 +15,18 @@ const mongoose = require("mongoose");
 
 const DATABASE_URL = "mongodb://localhost:27017/aroundb";
 // 4 cors
-const settings = {
-  origin: "https:localhost/3000",
-  methods: "GET, POST, PUT, DELETE",
-  allowedHeaders: "Content-Type",
-};
+// const settings = {
+//   origin: "https:localhost/3000",
+//   methods: "GET, POST, PUT, DELETE",
+//   allowedHeaders: "Content-Type",
+// };
 
 mongoose.connect(DATABASE_URL).then(() => {
   console.log("Server connected");
 });
 
 //Cors Middleware
-app.use(cors(settings));
+//app.use(cors(settings));
 //app.use(auth);
 //Middleware to parse JSON
 app.use(express.json());
