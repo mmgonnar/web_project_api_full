@@ -45,8 +45,10 @@ function App() {
       setIsLoading(false);
       return;
     }
+
+    api.setToken(jwt);
     api
-      .getUserInfo(jwt)
+      .getUserInfo()
       .then((userData) => {
         setIsLoggedIn(true);
         //setUserData(userData.email);

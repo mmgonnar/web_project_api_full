@@ -1,8 +1,20 @@
 class Api {
   constructor({ address, token }) {
     this._url = address;
-    this._token = token;
+    this._token = localStorage.getItem("jwt");
   }
+
+  setToken(token) {
+    this._token = token;
+    localStorage.setItem("token", token);
+  }
+
+  // _getHeaders() {
+  //   return {
+  //     Authorization: this._token,
+  //     "Content-Type": "application/json",
+  //   };
+  // }
 
   getUserInfo() {
     return fetch(this._url + "/users/me", {

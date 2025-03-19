@@ -4,12 +4,12 @@ const { JWT_SECRET = "secret-token" } = process.env;
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 
-  if (!authorization || !authorization.startsWith("Bearer")) {
+  if (!authorization) {
     return res.status(401).send({ message: "Need Authorization" });
   }
 
   const token = authorization.replace("Bearer ", "");
-
+  console.log(token, "token");
   try {
     const payload = jwt.verify(token, JWT_SECRET);
     req.user = payload;
