@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const Card = require("../models/card");
+const { deleteCard } = require("./cards");
 
 const getUsers = async (req, res) => {
   console.log("get users");
@@ -90,13 +91,14 @@ const updateAvatar = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   const userId = req.user._id;
+  console.log(req.user._id, "user XXXXX");
+  //deleteCard(param)
   try {
     const deletedUser = await User.findByIdAndDelete(userId);
 
     if (!deletedUser) {
       return res.status(400).json({ message: "Delete user failed " });
     }
-    await Card.deleteMany({ owner: userId });
 
     res.json({ message: "User info deleted successfully" });
   } catch (err) {
