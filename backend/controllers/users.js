@@ -27,8 +27,7 @@ const getUserById = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { email, password } = req.body;
-
+  const { email, password, name, about, avatar } = req.body;
   bcrypt
     .hash(password, 10)
     .then((hash) => {
@@ -39,6 +38,7 @@ const createUser = async (req, res) => {
         about,
         avatar,
       });
+
       return newUser;
     })
     .then(async (newUser) => {
@@ -91,7 +91,6 @@ const updateAvatar = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   const userId = req.user._id;
-  console.log(req.user._id, "user XXXXX");
   //deleteCard(param)
   try {
     const deletedUser = await User.findByIdAndDelete(userId);

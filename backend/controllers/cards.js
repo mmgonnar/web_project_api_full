@@ -14,7 +14,7 @@ const getCards = async (req, res) => {
 
 const getCardById = async (req, res) => {
   try {
-    const card = await Card.findById(req.params.cardsId)
+    const card = await Card.findById(req.params.cardId)
       .populate("owner")
       .orFail(new Error("No card with that id has been found."));
 
@@ -49,7 +49,7 @@ const deleteCard = async (req, res) => {
       if (!card.owner.equals(req.user._id)) {
         return res.status(403).send({ message: "You can't delete this cards" });
       }
-      return Card.findByIdAndDelete(req.params.cardID);
+      return Card.findByIdAndDelete(req.params.cardId);
     })
     .then(() => {
       res.send({ message: "Card deleted" });

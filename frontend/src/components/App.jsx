@@ -265,7 +265,8 @@ function App() {
       .authorize(email, password)
       .then(({ token }) => {
         setToken(token);
-        api.setToken(token);
+        setJwt(token);
+        //api.setJwt(token);
 
         return api.getCards();
       })
@@ -277,6 +278,7 @@ function App() {
         setErrorMessage(false);
       })
       .catch((err) => {
+        console.log(err, "errror login");
         setIsOpen(true);
         setIsSuccess(false);
         if (err.message === "Error: 401" || err.status === 401) {
@@ -336,7 +338,7 @@ function App() {
                   onCardClick={handleCardClick}
                   onClose={handleClose}
                   selectedCard={selectedCard}
-                  setCurrentUser={setCurrentUser}
+                  //setCurrentUser={setCurrentUser}
                   onUpdateUser={handleUpdateUser}
                   onUpdateAvatar={handleUpdateAvatar}
                   cards={cards}

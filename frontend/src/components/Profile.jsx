@@ -15,7 +15,7 @@ const Profile = (props) => {
       </div>
       <div className="profile__info">
         <div className="profile__info-container">
-          <p className="profile__name">Jacques Cousteau</p>
+          <p className="profile__name"></p>
           <button
             onClick={props.onEditProfileClick}
             className="button button_edit"
