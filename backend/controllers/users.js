@@ -4,7 +4,6 @@ const Card = require("../models/card");
 const { deleteCard } = require("./cards");
 
 const getUsers = async (req, res) => {
-  console.log("get users");
   try {
     const users = await User.find().orFail(new Error("document not found"));
     res.json(users);
@@ -28,24 +27,25 @@ const getUserById = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { name, about, avatar, email, password } = req.body;
+  const { email, password } = req.body;
 
   bcrypt
     .hash(password, 10)
     .then((hash) => {
       const newUser = new User({
+        email,
+        password: hash,
         name,
         about,
         avatar,
-        email,
-        password: hash,
       });
       return newUser;
     })
     .then(async (newUser) => {
       const savedUser = await newUser.save();
+      //const defaultUser = new
       const defaultCard = new Card({
-        title: "Welcome!",
+        name: "Welcome!",
         link: "https://www.pushengage.com/wp-content/uploads/2022/02/Best-Website-Welcome-Message-Examples.png",
         owner: savedUser._id,
       });

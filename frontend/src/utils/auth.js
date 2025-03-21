@@ -2,14 +2,14 @@ import { getToken } from "./token";
 
 export const BASE_URL = "http://localhost:3000";
 
-export const register = (email, password, confirmPassword) => {
+export const register = (email, password, confirmPassword, name, link) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password, confirmPassword }),
+    body: JSON.stringify({ email, password, confirmPassword, name, link }),
   }).then((res) => {
     return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   });

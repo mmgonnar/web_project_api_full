@@ -35,12 +35,14 @@ function App() {
   const [errorMessage, setErrorMessage] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [jwt, setJwt] = useState(getToken());
+  //const { setCurrentUser, setCards } = useContext(CurrentUserContext);
 
   const navigate = useNavigate();
   // const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   useEffect(() => {
-    const jwt = getToken();
+    //const jwt = getToken();
     if (!jwt) {
       setIsLoading(false);
       return;
@@ -50,6 +52,7 @@ function App() {
     api
       .getUserInfo()
       .then((userData) => {
+        console.log(userData, "auth user");
         setIsLoggedIn(true);
         setUserEmail(userData.email);
         setCurrentUser(userData);
@@ -57,20 +60,11 @@ function App() {
       .catch(console.error)
       .finally(() => setIsLoading(false));
 
-    const fetchData = async () => {
-      try {
-        const cardsData = await api.getCards();
-        setCards(cardsData);
-      } catch (error) {
-        console.error("Error fetching user data: ", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    //
 
-    if (isLoggedIn) {
-      fetchData();
-    }
+    // if (isLoggedIn) {
+    //   fetchData();
+    // }
     // const getUserEmail = async () => {
     //   try {
     //     const data = await auth.getUserEmail();
@@ -87,7 +81,28 @@ function App() {
     //   }
     // };
     // getUserEmail();
-  }, [isLoggedIn]);
+  }, [jwt]);
+
+  useEffect(() => {
+    if (!isLoggedIn) return;
+    console.log("loading cards.....");
+
+    const fetchData = async () => {
+      try {
+        const cardsData = await api.getCards();
+        if (Array.isArray(cardsData)) {
+          setCards(cardsData);
+        }
+        console.log(cardsData, "All cards");
+        console.log(cards, "TARJETAS APP 88");
+      } catch (error) {
+        console.error("Error fetching user data: ", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, [isLoggedIn, jwt]);
 
   const handleCardLike = async (card) => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -179,9 +194,10 @@ function App() {
       });
   };
 
-  const handleNewCard = (link, title) => {
+  const handleNewCard = (link, name) => {
+    setIsLoading(true);
     api
-      .newCard(link, title)
+      .newCard(link, name)
       .then((addCard) => {
         setCards([addCard, ...cards]);
         handleClose("add");
@@ -190,7 +206,7 @@ function App() {
         console.error("Error adding new place");
       })
       .finally(() => {
-        setIsLoading(true);
+        setIsLoading(false);
       });
   };
 
@@ -199,7 +215,13 @@ function App() {
     setClose(false);
   };
 
-  const handleRegistration = async ({ email, password, confirmPassword }) => {
+  const handleRegistration = async ({
+    email,
+    password,
+    confirmPassword,
+    name,
+    link,
+  }) => {
     if (!emailPattern.test(email)) {
       setIsOpen(true);
       setIsSuccess(false);
@@ -213,11 +235,13 @@ function App() {
     }
 
     try {
-      await auth.register(email, password, confirmPassword);
+      console.log(email, password, confirmPassword, "registration");
+      await auth.register(email, password, confirmPassword, name, link);
       setIsOpen(true);
       setIsSuccess(true);
       navigate("/signin");
     } catch (err) {
+      console.log("registration error", err);
       setIsOpen(true);
       setIsSuccess(false);
       if (err.message === "Error: 400" || err.status === 400) {
@@ -240,8 +264,14 @@ function App() {
     auth
       .authorize(email, password)
       .then(({ token }) => {
-        //setUserData(email, password);
         setToken(token);
+        api.setToken(token);
+
+        return api.getCards();
+      })
+      .then((cards) => {
+        //setUserData(email, password);
+        setCards(cards);
         navigate("/");
         setIsLoggedIn(true);
         setErrorMessage(false);

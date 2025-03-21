@@ -2,6 +2,7 @@ class Api {
   constructor({ address, token }) {
     this._url = address;
     this._token = localStorage.getItem("jwt");
+    console.log(this._token, "TOKEN");
   }
 
   setToken(token) {
@@ -12,7 +13,7 @@ class Api {
   getUserInfo() {
     return fetch(this._url + "/users/me", {
       headers: {
-        Authorization: this._token,
+        Authorization: `Bearer ${this._token}`,
         "Content-Type": "application/json",
       },
     }).then((response) => {
@@ -23,7 +24,7 @@ class Api {
   getCards() {
     return fetch(this._url + "/cards", {
       headers: {
-        Authorization: this._token,
+        Authorization: `Bearer ${this._token}`,
         "Content-Type": "application/json",
       },
     })
@@ -37,7 +38,7 @@ class Api {
   updateUser(name, job) {
     return fetch(this._url + "/users/me", {
       headers: {
-        Authorization: this._token,
+        Authorization: `Bearer ${this._token}`,
         "Content-Type": "application/json",
       },
       method: "PATCH",
@@ -51,7 +52,7 @@ class Api {
   updateAvatar(avatar) {
     return fetch(this._url + "/users/me/avatar", {
       headers: {
-        Authorization: this._token,
+        Authorization: `Bearer ${this._token}`,
         "Content-Type": "application/json",
       },
       method: "PATCH",
@@ -64,7 +65,7 @@ class Api {
   newCard(link, title) {
     return fetch(this._url + "/cards", {
       headers: {
-        Authorization: this._token,
+        Authorization: `Bearer ${this._token}`,
         "Content-Type": "application/json",
       },
       method: "POST",
@@ -78,7 +79,7 @@ class Api {
   deleteCard(idCard) {
     return fetch(this._url + "/cards/" + idCard, {
       headers: {
-        Authorization: this._token,
+        Authorization: `Bearer ${this._token}`,
         "Content-Type": "application/json",
       },
       method: "DELETE",
@@ -88,7 +89,7 @@ class Api {
   likeCard(idCard) {
     return fetch(this._url + "/cards/likes/" + idCard, {
       headers: {
-        Authorization: this._token,
+        Authorization: `Bearer ${this._token}`,
         "Content-Type": "application/json",
       },
       method: "PUT",
@@ -98,7 +99,7 @@ class Api {
   deleteLikeCard(idCard) {
     return fetch(this._url + "/cards/likes/" + idCard, {
       headers: {
-        Authorization: this._token,
+        Authorization: `Bearer ${this._token}`,
         "Content-Type": "application/json",
       },
       method: "DELETE",
