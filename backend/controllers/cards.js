@@ -61,11 +61,12 @@ const addLike = async (req, res) => {
     req.params.cardId,
     { $addToSet: { likes: req.user._id } },
     { new: true }
-  );
+  ).populate("likes");
   res.send(addLike);
 };
 
 const removeLike = async (req, res) => {
+  console.log(addLike, "Like removed");
   const removeLike = await Card.findByIdAndUpdate(
     req.params.cardId,
     { $pull: { likes: req.user._id } },

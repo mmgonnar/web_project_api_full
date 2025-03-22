@@ -61,10 +61,14 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const { name, about } = req.body;
   try {
-    const updateUser = await User.findByIdAndUpdate(req.user._id, {
-      name,
-      about,
-    }).orFail(new Error("User not found"));
+    const updateUser = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        name,
+        about,
+      },
+      { new: true }
+    ).orFail(new Error("User not found"));
     res.json(updateUser);
   } catch (err) {
     if (err.message === "User not found") {

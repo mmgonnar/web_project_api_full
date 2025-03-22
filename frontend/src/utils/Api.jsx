@@ -2,12 +2,11 @@ class Api {
   constructor({ address, token }) {
     this._url = address;
     this._token = localStorage.getItem("jwt");
-    console.log(this._token, "TOKEN");
   }
 
   setToken(token) {
     this._token = token;
-    localStorage.setItem("token", token);
+    //localStorage.setItem("jwt", token);
   }
 
   getUserInfo() {
@@ -87,17 +86,18 @@ class Api {
   }
 
   likeCard(idCard) {
-    return fetch(this._url + "/cards/likes/" + idCard, {
+    console.log(idCard, "card Id like API 89");
+    return fetch(this._url + "/cards/" + idCard + "/likes", {
       headers: {
         Authorization: `Bearer ${this._token}`,
         "Content-Type": "application/json",
       },
-      method: "PUT",
+      method: "PATCH",
     }).then((response) => response.json());
   }
 
   deleteLikeCard(idCard) {
-    return fetch(this._url + "/cards/likes/" + idCard, {
+    return fetch(this._url + "/cards/" + idCard + "/likes", {
       headers: {
         Authorization: `Bearer ${this._token}`,
         "Content-Type": "application/json",

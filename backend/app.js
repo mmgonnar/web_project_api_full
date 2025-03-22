@@ -17,7 +17,7 @@ const DATABASE_URL = "mongodb://127.0.0.1:27017/aroundb";
 // 4 cors
 const settings = {
   origin: "*",
-  methods: "GET, POST, PUT, DELETE",
+  methods: "GET, POST, PUT, DELETE, PATCH",
   allowedHeaders: "Content-Type, Authorization",
 };
 

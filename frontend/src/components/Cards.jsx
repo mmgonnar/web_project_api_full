@@ -4,8 +4,6 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const Cards = (props) => {
   const { currentUser, cards } = useContext(CurrentUserContext);
-  console.log(cards, "Cards from CurrentUserContext, CARDS 6");
-  console.log(currentUser, "CurrentUserContext, CARDS 7");
 
   if (!cards) {
     return <p>No cards available</p>;

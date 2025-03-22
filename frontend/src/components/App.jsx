@@ -52,35 +52,12 @@ function App() {
     api
       .getUserInfo()
       .then((userData) => {
-        console.log(userData, "auth user");
         setIsLoggedIn(true);
         setUserEmail(userData.email);
         setCurrentUser(userData);
       })
       .catch(console.error)
       .finally(() => setIsLoading(false));
-
-    //
-
-    // if (isLoggedIn) {
-    //   fetchData();
-    // }
-    // const getUserEmail = async () => {
-    //   try {
-    //     const data = await auth.getUserEmail();
-    //     if (data) {
-    //       setUserEmail(data.data.email);
-    //     } else {
-    //       setErrorMessage("User does not exist");
-    //     }
-    //   } catch (err) {
-    //     console.error(err);
-    //     setErrorMessage("Error getting data");
-    //   } finally {
-    //     setIsLoading(false); // XXXXXXXXXXXXX
-    //   }
-    // };
-    // getUserEmail();
   }, [jwt]);
 
   useEffect(() => {
@@ -93,8 +70,6 @@ function App() {
         if (Array.isArray(cardsData)) {
           setCards(cardsData);
         }
-        console.log(cardsData, "All cards");
-        console.log(cards, "TARJETAS APP 88");
       } catch (error) {
         console.error("Error fetching user data: ", error);
       } finally {
@@ -105,14 +80,19 @@ function App() {
   }, [isLoggedIn, jwt]);
 
   const handleCardLike = async (card) => {
+    console.log(card, "card handlelike");
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    console.log(currentUser._id, "current user handle like APP 116");
     try {
       let newCard;
       if (isLiked) {
+        console.log(isLiked, "add like");
         newCard = await api.deleteLikeCard(card._id);
       } else {
         newCard = await api.likeCard(card._id);
+        console.log(isLiked, "remove like");
       }
+      console.log(newCard, "NewCards, app 113");
 
       setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
     } catch (error) {
@@ -170,9 +150,12 @@ function App() {
   };
 
   const handleUpdateUser = (name, about) => {
+    console.log(name, "Name");
+    console.log(about, "About");
     api
       .updateUser(name, about)
       .then((updateUser) => {
+        console.log(updateUser, "Update User");
         setCurrentUser(updateUser);
         handleClose("edit");
       })
@@ -235,13 +218,11 @@ function App() {
     }
 
     try {
-      console.log(email, password, confirmPassword, "registration");
       await auth.register(email, password, confirmPassword, name, link);
       setIsOpen(true);
       setIsSuccess(true);
       navigate("/signin");
     } catch (err) {
-      console.log("registration error", err);
       setIsOpen(true);
       setIsSuccess(false);
       if (err.message === "Error: 400" || err.status === 400) {
@@ -278,7 +259,6 @@ function App() {
         setErrorMessage(false);
       })
       .catch((err) => {
-        console.log(err, "errror login");
         setIsOpen(true);
         setIsSuccess(false);
         if (err.message === "Error: 401" || err.status === 401) {
