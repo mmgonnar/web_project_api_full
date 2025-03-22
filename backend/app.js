@@ -7,6 +7,7 @@ const userRoutes = require("./routes/users");
 const cardRoutes = require("./routes/cards");
 const authRoutes = require("./routes/auth");
 const auth = require("./middleware/auth");
+const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -35,12 +36,14 @@ app.use((req, res, next) => {
   console.log(`${new Date().toLocaleString()}, ${req.method}, ${req.url}`);
   next();
 });
-// app.use((req, res, next) => {
-//   req.user = {
-//     _id: "67ae6a939bdd5642eb30c371",
-//   };
+//
 
-//   next();
+app.use(errorHandler);
+// app.use((err, req, res, next) => {
+//   res
+//     .status(500)
+//     .send({ message: "Internal error or misconfiguration has occurred" });
+//   next(new Error("Authorization error"));
 // });
 
 //root

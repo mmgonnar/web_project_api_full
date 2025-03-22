@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { removeToken } from "../utils/token";
+//import { removeToken } from "../utils/token";
 
 const NavbarMobile = ({ isOpen, setIsMenuOpen, showCloseButton = true }) => {
   const {
