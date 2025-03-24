@@ -58,7 +58,7 @@ const createUser = async (req, res) => {
     });
 };
 
-const updateUser = async (req, res) => {
+const updateUser = async (req, res, next) => {
   const { name, about } = req.body;
   try {
     const updateUser = await User.findByIdAndUpdate(
@@ -68,14 +68,31 @@ const updateUser = async (req, res) => {
         about,
       },
       { new: true }
-    ).orFail(new Error("User not found"));
+    );
+    if (!updateUser) {
+      return next({ status: 400, message: "User not found" });
+    }
     res.json(updateUser);
   } catch (err) {
-    if (err.message === "User not found") {
-      return res.status(404).json({ message: err.message });
-    }
-    res.status(500).json({ message: err.message });
+    next(err);
   }
+  // const { name, about } = req.body;
+  // try {
+  //   const updateUser = await User.findByIdAndUpdate(
+  //     req.user._id,
+  //     {
+  //       name,
+  //       about,
+  //     },
+  //     { new: true }
+  //   ).orFail(new Error("User not found"));
+  //   res.json(updateUser);
+  // } catch (err) {
+  //   if (err.message === "User not found") {
+  //     return res.status(404).json({ message: err.message });
+  //   }
+  //   res.status(500).json({ message: err.message });
+  // }
 };
 
 const updateAvatar = async (req, res) => {

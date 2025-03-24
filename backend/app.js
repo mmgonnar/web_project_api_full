@@ -19,7 +19,7 @@ const DATABASE_URL = "mongodb://127.0.0.1:27017/aroundb";
 const settings = {
   origin: "*",
   methods: "GET, POST, PUT, DELETE, PATCH",
-  allowedHeaders: "Content-Type, Authorization",
+  AllowedHeaders: ["Content-Type", "Authorization"],
 };
 
 mongoose.connect(DATABASE_URL).then(() => {
@@ -38,7 +38,6 @@ app.use((req, res, next) => {
 });
 //
 
-app.use(errorHandler);
 // app.use((err, req, res, next) => {
 //   res
 //     .status(500)
@@ -58,12 +57,18 @@ app.use(auth);
 app.use("/", userRoutes); //users
 app.use("/", cardRoutes); // cards
 
+// Ruta para probar errores 500
+// app.get("/force-500", (req, res, next) => {
+//   next(new Error("Error forzado para pruebas"));
+// });
+
 // not existing routes
 app.use((req, res) => {
   console.log(res);
   res.status(404).json({ message: "Page not found" });
 });
 
+app.use(errorHandler);
 //start server
 app.listen(PORT, () => {
   console.log(`Server listening in http://localhost:${PORT}`);
