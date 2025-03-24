@@ -256,16 +256,26 @@ function App() {
         setCards(cards);
         navigate("/");
         setIsLoggedIn(true);
-        setErrorMessage(false);
+        setErrorMessage(null);
       })
       .catch((err) => {
         setIsOpen(true);
         setIsSuccess(false);
-        if (err.message === "Error: 401" || err.status === 401) {
-          setErrorMessage("Something went wrong! Please try again.");
-        } else {
-          setErrorMessage("Incorrect email or password");
-        }
+        // if (err.message === "Error: 401" || err.status === 401) {
+        //   setErrorMessage("Something went wrong! Please try again.");
+        // } else {
+        //   setErrorMessage("Incorrect email or password");
+        // }
+
+        const errorMessage =
+          err.response?.data?.message ||
+          "Service unavailable. Please try later.";
+        setErrorMessage(errorMessage);
+
+        console.error("Login error:", {
+          status: err.response?.status,
+          message: errorMessage,
+        });
       });
   };
 

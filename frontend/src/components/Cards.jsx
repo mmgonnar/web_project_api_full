@@ -10,7 +10,7 @@ const Cards = (props) => {
   }
   //poner condicional de que si no hay salga un mensaje que no hay
   //const isOwn = card.owner._id === currentUser._id;
-  // console.log(cards[0].owner, "Card owner");
+  console.log(cards, "Card ");
   return (
     <div className="cards" id="cards-template">
       {cards
