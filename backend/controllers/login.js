@@ -36,6 +36,7 @@ const login = (req, res, next) => {
       });
     })
     .catch((err) => {
+      req.type = "user";
       next(err);
     });
 };

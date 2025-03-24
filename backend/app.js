@@ -8,6 +8,7 @@ const cardRoutes = require("./routes/cards");
 const authRoutes = require("./routes/auth");
 const auth = require("./middleware/auth");
 const errorHandler = require("./middleware/errorHandler");
+const { errors } = require("celebrate");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -57,7 +58,7 @@ app.use(auth);
 app.use("/", userRoutes); //users
 app.use("/", cardRoutes); // cards
 
-// Ruta para probar errores 500
+//Ruta para probar errores 500
 // app.get("/force-500", (req, res, next) => {
 //   next(new Error("Error forzado para pruebas"));
 // });
@@ -68,6 +69,7 @@ app.use((req, res) => {
   res.status(404).json({ message: "Page not found" });
 });
 
+app.use(errors());
 app.use(errorHandler);
 //start server
 app.listen(PORT, () => {

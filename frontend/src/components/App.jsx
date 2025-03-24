@@ -259,6 +259,7 @@ function App() {
         setErrorMessage(null);
       })
       .catch((err) => {
+        console.log(err, "Error front");
         setIsOpen(true);
         setIsSuccess(false);
         // if (err.message === "Error: 401" || err.status === 401) {
@@ -267,9 +268,7 @@ function App() {
         //   setErrorMessage("Incorrect email or password");
         // }
 
-        const errorMessage =
-          err.response?.data?.message ||
-          "Service unavailable. Please try later.";
+        const errorMessage = err || "Service unavailable. Please try later.";
         setErrorMessage(errorMessage);
 
         console.error("Login error:", {

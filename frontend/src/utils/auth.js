@@ -23,9 +23,19 @@ export const authorize = (email, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-  });
+  })
+    .then((res) => {
+      console.log(res, "res 27");
+      return res.json();
+      //return res.ok ? res.json() : Promise.reject(res.message);
+    })
+    .then((res) => {
+      console.log(res, "res 33");
+      return res.status ? Promise.reject(res.message) : res;
+      // if(res.status) {
+      //   return
+      // }
+    });
 };
 
 export const getUserEmail = async (email) => {

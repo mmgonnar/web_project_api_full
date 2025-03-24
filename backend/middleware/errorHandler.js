@@ -9,13 +9,21 @@ module.exports = (err, req, res, next) => {
   });
 
   const errorMessages = {
-    400: "Missing fields. Please fill all fields.",
-    401: "Wrong credentials! Please try again.",
-    404: "Account not found. Please register or check your email.",
-    500: "Service temporarily unavailable. Try later.",
+    users: {
+      400: "Missing fields. Please fill all fields.",
+      401: "Wrong credentials! Please try again.",
+      404: "Account not found. Please register or check your email.",
+      500: "Service temporarily unavailable. Try later.",
+    },
+    card: {
+      400: "Missing fields. Please fill all fields.",
+      401: "Wrong credentials! Please try again.",
+      404: "Account not found. Please register or check your email.",
+      500: "Service temporarily unavailable. Try later.",
+    },
   };
 
-  const message = errorMessages[statusCode] || "Unknown error.";
+  const message = errorMessages[req.type][statusCode] || "Unknown error.";
 
   res.status(statusCode).json({ status: "error", message: message });
 
