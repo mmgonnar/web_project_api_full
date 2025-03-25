@@ -1,6 +1,6 @@
 const Card = require("../models/card");
 
-const getCards = async (req, res) => {
+const getCards = async (req, res, next) => {
   try {
     const cards = await Card.find()
       .populate("owner")
@@ -8,11 +8,12 @@ const getCards = async (req, res) => {
       .orFail(new Error("document not found"));
     res.json(cards);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    req.type = "card";
+    next(err);
   }
 };
 
-const getCardById = async (req, res) => {
+const getCardById = async (req, res, next) => {
   try {
     const card = await Card.findById(req.params.cardId)
       .populate("owner")
@@ -20,58 +21,84 @@ const getCardById = async (req, res) => {
 
     res.json(card);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    req.type = "card";
+    next(err);
   }
 };
 
-//New Card
-const createCard = async (req, res) => {
-  const { name, link } = req.body;
-  const userId = req.user._id;
-
-  const createCard = new Card({
-    name,
-    link,
-    owner: userId,
-  });
-
+const createCard = async (req, res, next) => {
   try {
-    const savedCard = await createCard.save();
+    const { name, link } = req.body;
+    const userId = req.user._id;
+
+    const newCard = new Card({
+      name,
+      link,
+      owner: userId,
+    });
+
+    const savedCard = await newCard.save();
     res.status(201).json(savedCard);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    req.type = "card";
+    next(err);
   }
 };
 
-const deleteCard = async (req, res) => {
-  await Card.findById(req.params.cardId)
-    .then((card) => {
-      if (!card.owner.equals(req.user._id)) {
-        return res.status(403).send({ message: "You can't delete this cards" });
-      }
-      return Card.findByIdAndDelete(req.params.cardId);
-    })
-    .then(() => {
-      res.send({ message: "Card deleted" });
-    });
+const deleteCard = async (req, res, next) => {
+  try {
+    const card = await Card.findById(req.params.cardId);
+
+    if (!card) {
+      const error = new Error("");
+      error.status = 404;
+      throw error;
+    }
+
+    if (!card.owner.equals(req.user._id)) {
+      const error = new Error("");
+      error.status = 403;
+      throw error;
+    }
+
+    const deletedCard = await Card.findByIdAndDelete(req.params.cardId);
+    res.json({ message: "Card deleted successfully" });
+  } catch (err) {
+    req.type = "card";
+    next(err);
+  }
 };
 
-const addLike = async (req, res) => {
-  const addLike = await Card.findByIdAndUpdate(
-    req.params.cardId,
-    { $addToSet: { likes: req.user._id } },
-    { new: true }
-  ).populate("likes");
-  res.send(addLike);
+const addLike = async (req, res, next) => {
+  try {
+    const addedLike = await Card.findByIdAndUpdate(
+      req.params.cardId,
+      { $addToSet: { likes: req.user._id } },
+      { new: true }
+    )
+      .populate("likes")
+      .orFail(new Error("Card not found"));
+
+    res.json(addedLike);
+  } catch (err) {
+    req.type = "card";
+    next(err);
+  }
 };
 
-const removeLike = async (req, res) => {
-  const removeLike = await Card.findByIdAndUpdate(
-    req.params.cardId,
-    { $pull: { likes: req.user._id } },
-    { new: true }
-  );
-  res.send(removeLike);
+const removeLike = async (req, res, next) => {
+  try {
+    const removedLike = await Card.findByIdAndUpdate(
+      req.params.cardId,
+      { $pull: { likes: req.user._id } },
+      { new: true }
+    ).orFail(new Error("Card not found"));
+
+    res.json(removedLike);
+  } catch (err) {
+    req.type = "card";
+    next(err);
+  }
 };
 
 module.exports = {
