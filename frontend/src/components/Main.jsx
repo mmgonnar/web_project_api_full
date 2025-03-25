@@ -5,6 +5,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
+import ConfiramtionPopup from "./ConfirmationPopup";
 
 const Main = (props) => {
   const { currentUser } = useContext(CurrentUserContext);
@@ -70,29 +71,8 @@ const Main = (props) => {
         ></EditAvatarPopup>
       )}
       {/* Popup Confirmation */}
-      <div className="popup popup_confirmation">
-        <div className="popup__overlay"></div>
-        <div className="popup__content popup__content-confirmation">
-          <div className="popup__container">
-            <button className="button button_close"></button>
-            <span className="popup__title">Are you sure?</span>
-            <form
-              className="popup__form popup__form_add"
-              id="form-add-place-confirmation"
-              noValidate
-            >
-              <fieldset className="popup__set">
-                <button
-                  type="submit"
-                  className="button button_submit button_submit-disabled"
-                >
-                  Yes
-                </button>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </div>
+      {/* {props.isConfirmationPopupOpen && <ConfiramtionPopup
+      ></ConfiramtionPopup>} */}
       {/* Cards */}
       <Cards
         onCardClick={props.onCardClick}

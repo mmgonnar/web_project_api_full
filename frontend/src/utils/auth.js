@@ -11,7 +11,7 @@ export const register = (email, password, confirmPassword, name, link) => {
     },
     body: JSON.stringify({ email, password, confirmPassword, name, link }),
   }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+    return res.status ? Promise.reject(res.message) : res;
   });
 };
 

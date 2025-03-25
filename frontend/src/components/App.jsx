@@ -13,13 +13,14 @@ import Register from "./Register";
 import ProtectedRoute from "./ProtectedRoute";
 import { getToken, setToken, removeToken } from "../utils/token";
 import InfoTooltip from "./InfoToolTip";
-import emailPattern from "../constants/constants";
+import { emailPattern, passwordPattern } from "../constants/constants";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isAvatarPopupOpen, setAvatarPopupOpen] = useState(false);
   const [isCardPopupOpen, setCardPopupOpen] = useState(false);
+  const [isConfirmationPopupOpen, SetConfirmationPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [cards, setCards] = useState([]);
   //const [userData, setUserData] = useState({ username: "", email: "" });
@@ -40,6 +41,28 @@ function App() {
 
   const navigate = useNavigate();
   // const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // const tryCatch = async (callback, errorMessage) => {
+  //   try {
+  //     //await auth.register(email, password, confirmPassword, name, link);
+  //     await callback();
+  //     setIsOpen(true);
+  //     setIsSuccess(true);
+  //     navigate("/signin");
+  //   } catch (err) {
+  //     console.log(typeof err, "app.jsx 129");
+  //     setIsOpen(true);
+  //     setIsSuccess(false);
+  //     const errorMessage =
+  //       err || "Account already . Please register or check your email.";
+  //     setErrorMessage(errorMessage);
+
+  //     console.error("Register error:", {
+  //       status: err.response?.status,
+  //       message: errorMessage,
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
     //const jwt = getToken();
@@ -112,6 +135,7 @@ function App() {
     try {
       await api.deleteCard(cardId);
       setCards((state) => state.filter((c) => c._id !== cardId));
+      setIsConfirmationPopupOpen(true);
     } catch (error) {
       console.error("Error deleting card");
     }
@@ -207,6 +231,17 @@ function App() {
       setIsSuccess(false);
       return setErrorMessage("Passwords do not match!");
     }
+    //Password validation pattern
+    // if (!passwordPattern.test(password)) {
+    //   setIsOpen(true);
+    //   setIsSuccess(false);
+    //   return setErrorMessage(
+    //     "The password must meet the following requirements: be at least 5 characters long, include uppercase, lowercase, and numbers."
+    //   );
+    // }
+
+    // Volver a esto mas tarde
+    //tryCatch(auth.register, "");
 
     try {
       await auth.register(email, password, confirmPassword, name, link);
@@ -216,34 +251,29 @@ function App() {
     } catch (err) {
       setIsOpen(true);
       setIsSuccess(false);
-      const errorMessage = err || "Service unavailable. Please try later.";
+      const errorMessage =
+        err || "Account already registered. Please log into your account";
       setErrorMessage(errorMessage);
 
       console.error("Register error:", {
         status: err.response?.status,
         message: errorMessage,
       });
-      // if (err.message === "Error: 400" || err.status === 400) {
-      //   setErrorMessage("Something went wrong! Please try again.");
-      // } else {
-      //   setErrorMessage("This email is already registered");
-      // }
     }
   };
 
   const handleLogin = async ({ email, password }) => {
+    // Validaciones iniciales
+    if (!email || !password) {
+      return;
+    }
+
+    if (!emailPattern.test(email)) {
+      setIsOpen(true);
+      setIsSuccess(false);
+      return setErrorMessage("Please use a valid email");
+    }
     try {
-      // Validaciones iniciales
-      if (!email || !password) {
-        return;
-      }
-
-      if (!emailPattern.test(email)) {
-        setIsOpen(true);
-        setIsSuccess(false);
-        return setErrorMessage("Please use a valid email");
-      }
-
       // Autorización y obtención del token
       const { token } = await auth.authorize(email, password);
       setToken(token);
@@ -254,7 +284,7 @@ function App() {
       const cards = await api.getCards();
       setCards(cards);
 
-      // Actualizar estado y navegar
+      // Actualiza estado y navegar
       navigate("/");
       setIsLoggedIn(true);
       setErrorMessage(null);
@@ -264,11 +294,12 @@ function App() {
 
       const errorMessage = err || "Service unavailable. Please try later.";
       setErrorMessage(errorMessage);
+      console.log("Error:", err.message);
 
-      console.error("Login error:", {
-        status: err.response?.status,
-        message: errorMessage,
-      });
+      // console.error("Login error:", {
+      //   status: err.response?.status,
+      //   message: errorMessage,
+      // });
     }
   };
 
@@ -276,7 +307,7 @@ function App() {
     setIsOpen(false);
   };
 
-  //pasarlo como prpo y limpiar codigo
+  //Pasarlo como props y limpiar codigo
   function handleLogout({ token }) {
     setIsLoggedIn(false);
     navigate("/signin");
@@ -315,6 +346,7 @@ function App() {
                   isAddPlacePopupOpen={isAddPlacePopupOpen}
                   isAvatarPopupOpen={isAvatarPopupOpen}
                   isCardPopupOpen={isCardPopupOpen}
+                  isConfirmationPopupOpen={isConfirmationPopupOpen}
                   onEditProfileClick={handleEditProfileClick}
                   onAddPlaceClick={handleAddPlaceClick}
                   onEditAvatarClick={handleEditAvatarClick}

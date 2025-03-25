@@ -53,10 +53,9 @@ const userValidationSchema = Joi.object().keys({
       "https://i.pinimg.com/736x/b5/49/41/b5494197b2d462c940f88988b203d290.jpg"
     ),
   email: Joi.string()
-    .email()
-    .required()
-    .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
-  password: Joi.string().required(),
+    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+    .required(),
+  password: Joi.string().required().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
 });
 
 module.exports = mongoose.model("user", userSchema);

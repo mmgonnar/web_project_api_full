@@ -14,14 +14,21 @@ const getUsers = async (req, res, next) => {
 
 const getUserById = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user._id).orFail(
-      new Error("No user with that id has been found.")
-    );
-    if (!user) {
-      const error = new Error("");
-      error.status = 404;
-      throw error;
-    }
+    console.log(req.user._id, "aaaaaa");
+    const user = await User.findById(req.params.userId)
+      .populate()
+      .orFail(() => {
+        const error = new Error("");
+        error.status = 404;
+        throw error;
+      });
+
+    // err.status = 404
+    // if (!user) {
+    //   const error = new Error("");
+    //   error.status = 404;
+    //   throw error;
+    // }
     res.json(user);
   } catch (err) {
     req.type = "user";
