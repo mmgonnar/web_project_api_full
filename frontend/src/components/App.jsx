@@ -216,56 +216,60 @@ function App() {
     } catch (err) {
       setIsOpen(true);
       setIsSuccess(false);
-      if (err.message === "Error: 400" || err.status === 400) {
-        setErrorMessage("Something went wrong! Please try again.");
-      } else {
-        setErrorMessage("This email is already registered");
-      }
+      const errorMessage = err || "Service unavailable. Please try later.";
+      setErrorMessage(errorMessage);
+
+      console.error("Register error:", {
+        status: err.response?.status,
+        message: errorMessage,
+      });
+      // if (err.message === "Error: 400" || err.status === 400) {
+      //   setErrorMessage("Something went wrong! Please try again.");
+      // } else {
+      //   setErrorMessage("This email is already registered");
+      // }
     }
   };
 
-  const handleLogin = ({ email, password }) => {
-    if (!email || !password) {
-      return;
-    }
-    if (!emailPattern.test(email)) {
-      setIsOpen(true);
-      setIsSuccess(false);
-      return setErrorMessage("Please use a valid email");
-    }
-    auth
-      .authorize(email, password)
-      .then(({ token }) => {
-        setToken(token);
-        setJwt(token);
-        //api.setJwt(token);
+  const handleLogin = async ({ email, password }) => {
+    try {
+      // Validaciones iniciales
+      if (!email || !password) {
+        return;
+      }
 
-        return api.getCards();
-      })
-      .then((cards) => {
-        //setUserData(email, password);
-        setCards(cards);
-        navigate("/");
-        setIsLoggedIn(true);
-        setErrorMessage(null);
-      })
-      .catch((err) => {
+      if (!emailPattern.test(email)) {
         setIsOpen(true);
         setIsSuccess(false);
-        // if (err.message === "Error: 401" || err.status === 401) {
-        //   setErrorMessage("Something went wrong! Please try again.");
-        // } else {
-        //   setErrorMessage("Incorrect email or password");
-        // }
+        return setErrorMessage("Please use a valid email");
+      }
 
-        const errorMessage = err || "Service unavailable. Please try later.";
-        setErrorMessage(errorMessage);
+      // Autorización y obtención del token
+      const { token } = await auth.authorize(email, password);
+      setToken(token);
+      setJwt(token);
+      //api.setJwt(token);
 
-        console.error("Login error:", {
-          status: err.response?.status,
-          message: errorMessage,
-        });
+      // Obtener cards después de la autorización
+      const cards = await api.getCards();
+      setCards(cards);
+
+      // Actualizar estado y navegar
+      navigate("/");
+      setIsLoggedIn(true);
+      setErrorMessage(null);
+    } catch (err) {
+      setIsOpen(true);
+      setIsSuccess(false);
+
+      const errorMessage = err || "Service unavailable. Please try later.";
+      setErrorMessage(errorMessage);
+
+      console.error("Login error:", {
+        status: err.response?.status,
+        message: errorMessage,
       });
+    }
   };
 
   const handleCloseTooltip = () => {

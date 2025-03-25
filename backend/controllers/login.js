@@ -5,41 +5,41 @@ const jwt = require("jsonwebtoken");
 
 const { JWT_SECRET = "secret-token" } = process.env;
 
-const login = (req, res, next) => {
-  const { email, password } = req.body;
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
 
-  if (!email || !password) {
-    let error = new Error("");
-    error.status = 400;
-    throw error;
-  }
+    if (!email || !password) {
+      const error = new Error("");
+      error.status = 400;
+      throw error;
+    }
 
-  User.findOne({ email })
-    .select("+password")
-    .then((user) => {
-      if (!user) {
-        let error = new Error("");
-        error.status = 404;
-        throw error;
-      }
+    const user = await User.findOne({ email }).select("+password");
 
-      return bcrypt.compare(password, user.password).then((matched) => {
-        if (!matched) {
-          let error = new Error("");
-          error.status = 401;
-          throw error;
-        }
-        const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
-          expiresIn: "7d",
-        });
+    if (!user) {
+      const error = new Error("");
+      error.status = 404;
+      throw error;
+    }
 
-        res.status(200).send({ token });
-      });
-    })
-    .catch((err) => {
-      req.type = "user";
-      next(err);
+    const matched = await bcrypt.compare(password, user.password);
+
+    if (!matched) {
+      const error = new Error("");
+      error.status = 401;
+      throw error;
+    }
+
+    const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
+      expiresIn: "7d",
     });
+
+    res.status(200).send({ token });
+  } catch (err) {
+    req.type = "user";
+    next(err);
+  }
 };
 
 module.exports = {

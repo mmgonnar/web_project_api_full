@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const Card = require("../models/card");
-//const { deleteCard } = require("./cards");
+const { deleteCard } = require("./cards");
 
 const getUsers = async (req, res) => {
   try {
@@ -74,7 +74,10 @@ const updateUser = async (req, res, next) => {
     }
     res.json(updateUser);
   } catch (err) {
-    next(err);
+    if (err.message === "User not found") {
+      return res.status(404).json({ message: err.message });
+    }
+    res.status(500).json({ message: err.message });
   }
   // const { name, about } = req.body;
   // try {
