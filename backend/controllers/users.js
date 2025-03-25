@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const Card = require("../models/card");
-const { deleteCard } = require("./cards");
+//const { deleteCard } = require("./cards");
 
 const getUsers = async (req, res) => {
   try {

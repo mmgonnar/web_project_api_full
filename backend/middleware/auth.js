@@ -9,7 +9,6 @@ module.exports = (req, res, next) => {
   }
 
   const token = authorization.replace("Bearer ", "");
-  console.log(token, "token");
   try {
     const payload = jwt.verify(token, JWT_SECRET);
     req.user = payload;

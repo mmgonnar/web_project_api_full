@@ -8,7 +8,6 @@ import AddPlacePopup from "./AddPlacePopup";
 
 const Main = (props) => {
   const { currentUser } = useContext(CurrentUserContext);
-  console.log(currentUser, "Current user");
   return (
     <>
       <section className="profile">

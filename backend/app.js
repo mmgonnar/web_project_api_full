@@ -34,7 +34,9 @@ app.use(cors());
 app.use(express.json());
 //Middleware to get info
 app.use((req, res, next) => {
-  console.log(`${new Date().toLocaleString()}, ${req.method}, ${req.url}`);
+  console.log(
+    `${new Date().toLocaleString()}, ${req.method}, ${req.url}, "app.js 38"`
+  );
   next();
 });
 //
@@ -48,7 +50,6 @@ app.use((req, res, next) => {
 
 //root
 app.get("/", (req, res) => {
-  console.log("Received a request at the root endpoint.");
   res.sendStatus(200);
 });
 
@@ -58,18 +59,12 @@ app.use(auth);
 app.use("/", userRoutes); //users
 app.use("/", cardRoutes); // cards
 
-//Ruta para probar errores 500
-// app.get("/force-500", (req, res, next) => {
-//   next(new Error("Error forzado para pruebas"));
-// });
-
 // not existing routes
 app.use((req, res) => {
-  console.log(res);
   res.status(404).json({ message: "Page not found" });
 });
 
-app.use(errors());
+//app.use(errors());
 app.use(errorHandler);
 //start server
 app.listen(PORT, () => {

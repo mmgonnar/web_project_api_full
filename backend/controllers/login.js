@@ -7,26 +7,27 @@ const { JWT_SECRET = "secret-token" } = process.env;
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
-  console.log(email, "email");
 
   if (!email || !password) {
-    return next({ status: 400 });
+    let error = new Error("");
+    error.status = 400;
+    throw error;
   }
 
   User.findOne({ email })
     .select("+password")
     .then((user) => {
       if (!user) {
-        return next({ status: 404 });
-        // const error = new Error("User not found");
-        // error.status = 404;
-        // throw error;
+        let error = new Error("");
+        error.status = 404;
+        throw error;
       }
 
       return bcrypt.compare(password, user.password).then((matched) => {
         if (!matched) {
-          //throw new Error(res.status);
-          return next({ status: 401 });
+          let error = new Error("");
+          error.status = 401;
+          throw error;
         }
         const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
           expiresIn: "7d",

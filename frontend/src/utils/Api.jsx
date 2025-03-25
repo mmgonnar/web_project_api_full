@@ -86,7 +86,6 @@ class Api {
   }
 
   likeCard(idCard) {
-    console.log(idCard, "card Id like API 89");
     return fetch(this._url + "/cards/" + idCard + "/likes", {
       headers: {
         Authorization: `Bearer ${this._token}`,

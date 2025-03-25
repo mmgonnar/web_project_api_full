@@ -62,7 +62,6 @@ function App() {
 
   useEffect(() => {
     if (!isLoggedIn) return;
-    console.log("loading cards.....");
 
     const fetchData = async () => {
       try {
@@ -80,19 +79,14 @@ function App() {
   }, [isLoggedIn, jwt]);
 
   const handleCardLike = async (card) => {
-    console.log(card, "card handlelike");
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    console.log(currentUser._id, "current user handle like APP 116");
     try {
       let newCard;
       if (isLiked) {
-        console.log(isLiked, "add like");
         newCard = await api.deleteLikeCard(card._id);
       } else {
         newCard = await api.likeCard(card._id);
-        console.log(isLiked, "remove like");
       }
-      console.log(newCard, "NewCards, app 113");
 
       setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
     } catch (error) {
@@ -150,12 +144,9 @@ function App() {
   };
 
   const handleUpdateUser = (name, about) => {
-    console.log(name, "Name");
-    console.log(about, "About");
     api
       .updateUser(name, about)
       .then((updateUser) => {
-        console.log(updateUser, "Update User");
         setCurrentUser(updateUser);
         handleClose("edit");
       })
@@ -259,7 +250,6 @@ function App() {
         setErrorMessage(null);
       })
       .catch((err) => {
-        console.log(err, "Error front");
         setIsOpen(true);
         setIsSuccess(false);
         // if (err.message === "Error: 401" || err.status === 401) {
