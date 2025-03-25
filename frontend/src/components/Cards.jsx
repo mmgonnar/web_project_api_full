@@ -14,6 +14,7 @@ const Cards = (props) => {
     <div className="cards" id="cards-template">
       {cards
         .filter((card) => card && card.owner)
+        .reverse()
         .map((card) => {
           return (
             <div className="card" id={card._id} key={card._id}>
