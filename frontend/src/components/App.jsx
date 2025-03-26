@@ -65,11 +65,6 @@ function App() {
   // };
 
   useEffect(() => {
-    console.log("Estado currentUser:", currentUser);
-  }, [currentUser]);
-
-  useEffect(() => {
-    //const jwt = getToken();
     if (!jwt) {
       setIsLoading(false);
       return;
@@ -294,7 +289,6 @@ function App() {
 
       const errorMessage = err || "Service unavailable. Please try later.";
       setErrorMessage(errorMessage);
-      console.log("Error:", err.message);
 
       // console.error("Login error:", {
       //   status: err.response?.status,

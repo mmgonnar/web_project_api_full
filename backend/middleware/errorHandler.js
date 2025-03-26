@@ -1,7 +1,5 @@
 module.exports = (err, req, res, next) => {
-  console.log("errHandler ln2");
   const statusCode = err.status || 500;
-  console.log("aaaaaa");
 
   const reqType = req.type == "user" ? "user" : "card";
   const errorMessages = {
@@ -18,9 +16,8 @@ module.exports = (err, req, res, next) => {
       500: "Service temporarily unavailable. Try later.",
     },
   };
-
-  console.log(errorMessages[reqType][statusCode], "errHandler.js 22");
   const message = errorMessages[reqType][statusCode] || "Unknown error.";
+  console.log(errorMessages[reqType][statusCode], "errHandler");
 
   res.status(statusCode).json({ status: "error", message: message });
 };

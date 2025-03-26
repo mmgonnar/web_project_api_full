@@ -14,7 +14,6 @@ const getUsers = async (req, res, next) => {
 
 const getUserById = async (req, res, next) => {
   try {
-    console.log(req.user._id, "user ._id");
     const user = await User.findById(req.params.userId)
       .populate()
       .orFail(() => {
