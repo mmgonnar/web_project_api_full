@@ -2,6 +2,7 @@ class Api {
   constructor({ address, token }) {
     this._url = address;
     this._token = localStorage.getItem("jwt");
+    console.log(this._token, "bbbbbb");
   }
 
   setToken(token) {

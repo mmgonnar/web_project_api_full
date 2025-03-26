@@ -1,7 +1,8 @@
 module.exports = (err, req, res, next) => {
   console.log("errHandler ln2");
   const statusCode = err.status || 500;
-  //let message = err.message;
+  console.log("aaaaaa");
+
   const reqType = req.type == "user" ? "user" : "card";
   const errorMessages = {
     user: {

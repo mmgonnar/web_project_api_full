@@ -44,11 +44,18 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+const validateURL = (value, helpers) => {
+  if (validator.isURL(value)) {
+    return value;
+  }
+  return helpers.error("string.uri");
+};
+
 const userValidationSchema = Joi.object().keys({
   name: Joi.string().min(2).max(30).default("Jacques Cousteau"),
   about: Joi.string().min(2).max(30).default("An awesome explorer!"),
   avatar: Joi.string()
-    .uri()
+    .custom(validateURL)
     .default(
       "https://i.pinimg.com/736x/b5/49/41/b5494197b2d462c940f88988b203d290.jpg"
     ),
@@ -57,6 +64,8 @@ const userValidationSchema = Joi.object().keys({
     .required(),
   password: Joi.string().required().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
 });
+
+//Joi.string().required().custom(validateUrl);
 
 module.exports = mongoose.model("user", userSchema);
 

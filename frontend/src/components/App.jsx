@@ -65,6 +65,10 @@ function App() {
   // };
 
   useEffect(() => {
+    console.log("Estado currentUser:", currentUser);
+  }, [currentUser]);
+
+  useEffect(() => {
     //const jwt = getToken();
     if (!jwt) {
       setIsLoading(false);
@@ -194,6 +198,7 @@ function App() {
 
   const handleNewCard = (link, name) => {
     setIsLoading(true);
+
     api
       .newCard(link, name)
       .then((addCard) => {
@@ -231,16 +236,16 @@ function App() {
       setIsSuccess(false);
       return setErrorMessage("Passwords do not match!");
     }
-    //Password validation pattern
-    // if (!passwordPattern.test(password)) {
-    //   setIsOpen(true);
-    //   setIsSuccess(false);
-    //   return setErrorMessage(
-    //     "The password must meet the following requirements: be at least 5 characters long, include uppercase, lowercase, and numbers."
-    //   );
-    // }
+    // -----> Password validation pattern
+    if (!passwordPattern.test(password)) {
+      setIsOpen(true);
+      setIsSuccess(false);
+      return setErrorMessage(
+        "The password must meet the following requirements: be at least 5 characters long, include uppercase, lowercase, and numbers."
+      );
+    }
 
-    // Volver a esto mas tarde
+    //-----> Try this later
     //tryCatch(auth.register, "");
 
     try {
@@ -263,7 +268,6 @@ function App() {
   };
 
   const handleLogin = async ({ email, password }) => {
-    // Validaciones iniciales
     if (!email || !password) {
       return;
     }
@@ -274,17 +278,13 @@ function App() {
       return setErrorMessage("Please use a valid email");
     }
     try {
-      // Autorización y obtención del token
       const { token } = await auth.authorize(email, password);
       setToken(token);
       setJwt(token);
-      //api.setJwt(token);
 
-      // Obtener cards después de la autorización
       const cards = await api.getCards();
       setCards(cards);
 
-      // Actualiza estado y navegar
       navigate("/");
       setIsLoggedIn(true);
       setErrorMessage(null);
@@ -307,7 +307,7 @@ function App() {
     setIsOpen(false);
   };
 
-  //Pasarlo como props y limpiar codigo
+  // -----> Clean code and use it as a prop
   function handleLogout({ token }) {
     setIsLoggedIn(false);
     navigate("/signin");
