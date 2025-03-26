@@ -9,6 +9,7 @@ const authRoutes = require("./routes/auth");
 const auth = require("./middleware/auth");
 const errorHandler = require("./middleware/errorHandler");
 const { errors } = require("celebrate");
+const { requestLogger, errorLogger } = require("./middleware/logger");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -40,7 +41,7 @@ app.use((req, res, next) => {
   next();
 });
 //
-
+app.use(requestLogger);
 // app.use((err, req, res, next) => {
 //   res
 //     .status(500)
@@ -64,6 +65,7 @@ app.use((req, res) => {
   res.status(404).json({ message: "Page not found" });
 });
 
+app.use(errorLogger);
 //app.use(errors());
 app.use(errorHandler);
 //start server
