@@ -3,6 +3,7 @@ const Card = require("../models/card");
 const getCards = async (req, res, next) => {
   try {
     const cards = await Card.find()
+      .sort({ createdAt: -1 })
       .populate("owner")
       .populate("likes")
       .orFail(new Error("document not found"));

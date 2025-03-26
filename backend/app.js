@@ -1,6 +1,3 @@
-//import login from "./controllers/login";
-const { login, createUser } = require("./controllers/users");
-
 const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./routes/users");
@@ -66,7 +63,7 @@ app.use((req, res) => {
 });
 
 app.use(errorLogger);
-//app.use(errors());
+app.use(errors());
 app.use(errorHandler);
 //start server
 app.listen(PORT, () => {

@@ -5,8 +5,8 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 const Cards = (props) => {
   const { currentUser, cards } = useContext(CurrentUserContext);
 
-  if (!cards) {
-    return <p>No cards available</p>;
+  if (!cards || cards.length === 0) {
+    return <p>No hay tarjetas disponibles</p>;
   }
   //poner condicional de que si no hay salga un mensaje que no hay
   //const isOwn = card.owner._id === currentUser._id;
@@ -14,7 +14,6 @@ const Cards = (props) => {
     <div className="cards" id="cards-template">
       {cards
         .filter((card) => card && card.owner)
-        .reverse()
         .map((card) => {
           return (
             <div className="card" id={card._id} key={card._id}>
