@@ -20,7 +20,7 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isAvatarPopupOpen, setAvatarPopupOpen] = useState(false);
   const [isCardPopupOpen, setCardPopupOpen] = useState(false);
-  const [isConfirmationPopupOpen, SetConfirmationPopupOpen] = useState(false);
+  const [isConfirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [cards, setCards] = useState([]);
   //const [userData, setUserData] = useState({ username: "", email: "" });
@@ -131,13 +131,28 @@ function App() {
   // };
 
   const handleCardDelete = async (cardId) => {
+    console.log(selectedCard, "aaaaa");
+    if (!selectedCard) {
+      console.log("!selected card");
+      return;
+    }
+
     try {
-      await api.deleteCard(cardId);
-      setCards((state) => state.filter((c) => c._id !== cardId));
-      setIsConfirmationPopupOpen(true);
+      console.log("bbbb");
+      await api.deleteCard(selectedCard);
+      console.log("cccccccccc");
+      setCards((state) => state.filter((c) => c._id !== selectedCard));
+      handleClose("confirmation");
     } catch (error) {
+      console.log(error);
       console.error("Error deleting card");
     }
+  };
+
+  const handleConfirmationPopup = (cardId) => {
+    console.log(cardId);
+    setSelectedCard(cardId);
+    setConfirmationPopupOpen(true);
   };
 
   const handleEditAvatarClick = () => {
@@ -161,8 +176,10 @@ function App() {
     add: setAddPlacePopupOpen,
     avatar: setAvatarPopupOpen,
     edit: setEditProfilePopupOpen,
+    confirmation: setConfirmationPopupOpen,
     image: () => {
       setSelectedCard(null);
+      setCardPopupOpen(false);
     },
   };
 
@@ -347,11 +364,11 @@ function App() {
                   onCardClick={handleCardClick}
                   onClose={handleClose}
                   selectedCard={selectedCard}
-                  //setCurrentUser={setCurrentUser}
                   onUpdateUser={handleUpdateUser}
                   onUpdateAvatar={handleUpdateAvatar}
                   cards={cards}
-                  onCardDelete={handleCardDelete}
+                  onCardDelete={handleConfirmationPopup}
+                  onConfirmDelete={handleCardDelete}
                   onCardLike={handleCardLike}
                   onAddCard={handleNewCard}
                 />

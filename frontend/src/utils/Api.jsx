@@ -75,13 +75,16 @@ class Api {
   }
 
   deleteCard(idCard) {
+    console.log(idCard, "xxxxxx");
     return fetch(this._url + "/cards/" + idCard, {
       headers: {
         Authorization: `Bearer ${this._token}`,
         "Content-Type": "application/json",
       },
       method: "DELETE",
-    }).then((response) => response.json());
+    }).then((response) => {
+      console.log(response, "zzzzzz"), response.json();
+    });
   }
 
   likeCard(idCard) {

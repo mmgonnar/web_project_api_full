@@ -6,7 +6,7 @@ const Cards = (props) => {
   const { currentUser, cards } = useContext(CurrentUserContext);
 
   if (!cards || cards.length === 0) {
-    return <p>No hay tarjetas disponibles</p>;
+    return <p className="">No hay tarjetas disponibles</p>;
   }
   //poner condicional de que si no hay salga un mensaje que no hay
   //const isOwn = card.owner._id === currentUser._id;
@@ -39,7 +39,10 @@ const Cards = (props) => {
                   className={`${
                     card.owner._id === currentUser._id ? "button_delete" : ""
                   }`}
-                  onClick={() => props.onCardDelete(card._id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    props.onCardDelete(card._id);
+                  }}
                 ></button>
               </div>
             </div>

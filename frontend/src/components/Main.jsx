@@ -5,7 +5,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
-import ConfiramtionPopup from "./ConfirmationPopup";
+import ConfirmationPopup from "./ConfirmationPopup";
 
 const Main = (props) => {
   const { currentUser } = useContext(CurrentUserContext);
@@ -58,7 +58,7 @@ const Main = (props) => {
         ></AddPlacePopup>
       )}
       {/* Popup Image */}
-      {props.selectedCard && (
+      {props.selectedCard && props.isCardPopupOpen && (
         <ImagePopup card={props.selectedCard} onClose={props.onClose} />
       )}
       {/* Popup Avatar */}
@@ -71,14 +71,22 @@ const Main = (props) => {
         ></EditAvatarPopup>
       )}
       {/* Popup Confirmation */}
-      {/* {props.isConfirmationPopupOpen && <ConfiramtionPopup
-      ></ConfiramtionPopup>} */}
+      {props.isConfirmationPopupOpen && (
+        <ConfirmationPopup
+          isOpened={props.isConfirmationPopupOpen}
+          //onConfirmationDelete={props.onConfirmDelete}
+          onClose={props.onClose}
+          onCardDelete={props.onCardDelete}
+          onConfirmDelete={props.onConfirmDelete}
+        ></ConfirmationPopup>
+      )}
       {/* Cards */}
       <Cards
         onCardClick={props.onCardClick}
         cards={props.cards}
         onCardLike={props.onCardLike}
         onCardDelete={props.onCardDelete}
+        onConfirmationDelete={props.onConfirmDelete}
       />
     </>
   );
