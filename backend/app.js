@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./routes/users");
@@ -10,24 +11,20 @@ const { requestLogger, errorLogger } = require("./middleware/logger");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const corsSettings = require("./middleware/cors");
 
 const mongoose = require("mongoose");
 
 const DATABASE_URL = "mongodb://127.0.0.1:27017/aroundb";
-// 4 cors
-const settings = {
-  origin: "*",
-  methods: "GET, POST, PUT, DELETE, PATCH",
-  AllowedHeaders: ["Content-Type", "Authorization"],
-};
 
 mongoose.connect(DATABASE_URL).then(() => {
   console.log("Server connected");
 });
 
-//Cors Middleware
-app.use(cors(settings));
-//app.use(auth);
+//CORS
+app.use(cors(corsSettings));
+app.options("*", cors(corsSettings));
+app.use(auth);
 //Middleware to parse JSON
 app.use(express.json());
 //Middleware to get info
@@ -39,18 +36,17 @@ app.use((req, res, next) => {
 });
 //
 app.use(requestLogger);
-// app.use((err, req, res, next) => {
-//   res
-//     .status(500)
-//     .send({ message: "Internal error or misconfiguration has occurred" });
-//   next(new Error("Authorization error"));
-// });
 
 //root
 app.get("/", (req, res) => {
   res.sendStatus(200);
 });
 
+app.get("/crash-test", () => {
+  setTimeout(() => {
+    throw new Error("El servidor va a caer");
+  }, 0);
+});
 //auth routes
 app.use("/", authRoutes);
 app.use(auth);
