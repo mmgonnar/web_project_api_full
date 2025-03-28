@@ -109,7 +109,10 @@ class Api {
 }
 
 const api = new Api({
-  address: "http://localhost:3000",
+  address:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3001"
+      : "https://api.sudoa.crabdance.com",
 });
 
 export default api;
