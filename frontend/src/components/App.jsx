@@ -131,9 +131,7 @@ function App() {
   // };
 
   const handleCardDelete = async (cardId) => {
-    console.log(selectedCard, "aaaaa");
     if (!selectedCard) {
-      console.log("!selected card");
       return;
     }
 

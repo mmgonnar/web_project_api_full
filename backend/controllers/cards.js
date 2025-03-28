@@ -39,7 +39,10 @@ const createCard = async (req, res, next) => {
     });
 
     const savedCard = await newCard.save();
-    res.status(201).json(savedCard);
+    //savedCard.owner = { _id: userId };
+    const populatedCard = await Card.findById(savedCard._id).populate("owner");
+
+    res.status(201).json(populatedCard);
   } catch (err) {
     req.type = "card";
     next(err);

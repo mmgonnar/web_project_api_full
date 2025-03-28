@@ -58,3 +58,8 @@
   text-align: center;
   font-size: 1em;
 }
+
+.cards__message {
+  color: #fff;
+  font-size: 2em;
+}
