@@ -5,10 +5,13 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 const Cards = (props) => {
   const { currentUser, cards } = useContext(CurrentUserContext);
 
-  if (!cards || cards.length === 0) {
-    return <p className="">No hay tarjetas disponibles</p>;
-  }
-  //poner condicional de que si no hay salga un mensaje que no hay
+  console.log(cards, "card");
+  console.log(currentUser, "currentUser");
+  // if (currentUser && (!cards || cards.length === 0)) {
+  //   return <p className="cards__message">No hay tarjetas disponibles</p>;
+  // }
+
+  //if (!currentUser) return null;
   //const isOwn = card.owner._id === currentUser._id;
   return (
     <div className="cards" id="cards-template">

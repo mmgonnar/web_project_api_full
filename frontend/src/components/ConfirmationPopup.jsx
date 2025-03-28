@@ -40,6 +40,7 @@ const ConfirmationPopup = (props) => {
                 className="button button_submit"
                 onClick={(e) => {
                   e.stopPropagation();
+                  e.preventDefault();
                   props.onConfirmDelete();
                 }}
               >
