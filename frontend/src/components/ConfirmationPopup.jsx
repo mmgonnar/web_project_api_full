@@ -37,7 +37,7 @@ const ConfirmationPopup = (props) => {
           >
             <fieldset className="popup__set">
               <button
-                className="button button_submit button_submit-disabled"
+                className="button button_submit"
                 onClick={(e) => {
                   e.stopPropagation();
                   props.onConfirmDelete();
