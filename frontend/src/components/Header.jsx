@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { removeToken } from "../utils/token";
 import NavbarMobile from "./NavbarMobile";
-import NavbarDesktop from "./NavBarDesktop";
+import NavbarDesktop from "./NavbarDesktop";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
