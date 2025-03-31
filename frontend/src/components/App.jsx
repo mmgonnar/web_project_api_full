@@ -247,13 +247,13 @@ function App() {
       return setErrorMessage("Passwords do not match!");
     }
     // -----> Password validation pattern
-    if (!passwordPattern.test(password)) {
-      setIsOpen(true);
-      setIsSuccess(false);
-      return setErrorMessage(
-        "The password must meet the following requirements: be at least 5 characters long, include uppercase, lowercase, and numbers."
-      );
-    }
+    // if (!passwordPattern.test(password)) {
+    //   setIsOpen(true);
+    //   setIsSuccess(false);
+    //   return setErrorMessage(
+    //     "The password must meet the following requirements: be at least 5 characters long, include uppercase, lowercase, and numbers."
+    //   );
+    // }
 
     //-----> Try this later
     //tryCatch(auth.register, "");
