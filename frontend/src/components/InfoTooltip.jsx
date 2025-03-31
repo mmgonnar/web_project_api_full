@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import unsuccessful from "../../public/icons/unsuccessful.svg";
 import successful from "../../public/icons/successful.svg";
 
-const InfoToolTip = ({ onOpen, onSuccess, errorMessage, onClose }) => {
+const InfoTooltip = ({ onOpen, onSuccess, errorMessage, onClose }) => {
   const popupRef = useRef(null);
   const handleClose = () => {
     const popupId = popupRef.current.id;
@@ -52,4 +52,4 @@ const InfoToolTip = ({ onOpen, onSuccess, errorMessage, onClose }) => {
   );
 };
 
-export default InfoToolTip;
+export default InfoTooltip;
