@@ -266,14 +266,10 @@ function App() {
     } catch (err) {
       setIsOpen(true);
       setIsSuccess(false);
-      const errorMessage =
-        err || "Account already registered. Please log into your account";
-      setErrorMessage(errorMessage);
-
-      console.error("Register error:", {
-        status: err.response?.status,
-        message: errorMessage,
-      });
+      setErrorMessage(
+        err?.message || err || "Registration failed. Please try again."
+      );
+      console.error("Register error:", err);
     }
   };
 
@@ -294,21 +290,17 @@ function App() {
 
       const cards = await api.getCards();
       setCards(cards);
-
+      // Redirect and clean state
       navigate("/");
       setIsLoggedIn(true);
       setErrorMessage(null);
     } catch (err) {
       setIsOpen(true);
       setIsSuccess(false);
-
-      const errorMessage = err || "Service unavailable. Please try later.";
-      setErrorMessage(errorMessage);
-
-      // console.error("Login error:", {
-      //   status: err.response?.status,
-      //   message: errorMessage,
-      // });
+      setErrorMessage(
+        err?.message || err || "Service unavailable. Please try later."
+      );
+      console.error("Login error:", err);
     }
   };
 

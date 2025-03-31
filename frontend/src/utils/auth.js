@@ -2,6 +2,14 @@ import { getToken } from "./token";
 
 export const BASE_URL = "https://api.sudoa.crabdance.com";
 
+const handleResponse = async (response) => {
+  const data = await response.json();
+  if (!response.ok) {
+    return Promise.reject(data.message || data.error || "Request failed");
+  }
+  return data;
+};
+
 export const register = (email, password, confirmPassword, name, link) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
@@ -10,9 +18,7 @@ export const register = (email, password, confirmPassword, name, link) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password, confirmPassword, name, link }),
-  }).then((res) => {
-    return res.status ? Promise.reject(res.message) : res;
-  });
+  }).then(handleResponse);
 };
 
 export const authorize = (email, password) => {
@@ -23,32 +29,26 @@ export const authorize = (email, password) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .then((res) => {
-      return res.status ? Promise.reject(res.message) : res;
-    });
+  }).then(handleResponse);
 };
 
-export const getUserEmail = async (email) => {
-  try {
-    const response = await fetch("https://api.sudoa.crabdance.com", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
+// export const getUserEmail = async (email) => {
+//   try {
+//     const response = await fetch("https://api.sudoa.crabdance.com", {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${getToken()}`,
+//       },
+//     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const responseJson = await response.json();
-    return responseJson;
-  } catch (err) {
-    console.error(err);
-    return;
-  }
-};
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+//     const responseJson = await response.json();
+//     return responseJson;
+//   } catch (err) {
+//     console.error(err);
+//     return;
+//   }
+// };
