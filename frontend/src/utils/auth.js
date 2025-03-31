@@ -1,6 +1,6 @@
 import { getToken } from "./token";
 
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "https://api.sudoa.crabdance.com";
 
 export const register = (email, password, confirmPassword, name, link) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -34,16 +34,13 @@ export const authorize = (email, password) => {
 
 export const getUserEmail = async (email) => {
   try {
-    const response = await fetch(
-      "https://se-register-api.en.tripleten-services.com/v1/users/me",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getToken()}`,
-        },
-      }
-    );
+    const response = await fetch("https://api.sudoa.crabdance.com", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
