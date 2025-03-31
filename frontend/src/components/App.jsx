@@ -12,7 +12,7 @@ import * as auth from "../utils/auth";
 import Register from "./Register";
 import ProtectedRoute from "./ProtectedRoute";
 import { getToken, setToken, removeToken } from "../utils/token";
-import InfoTooltip from "./InfoToolTip";
+import InfoTooltip from "./InfoTooltip";
 import { emailPattern, passwordPattern } from "../constants/constants";
 
 function App() {
