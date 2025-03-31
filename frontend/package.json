@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "scp -r -i /Users/mmgn/.ssh/id_ed25519.pub ./dist/* gn_mariela@sudoa.crabdance.com:home/gn_mariela/web_project_api_full/frontend/dist;",
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "react": "^19.0.0",
