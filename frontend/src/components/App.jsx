@@ -87,7 +87,7 @@ function App() {
 
     const fetchData = async () => {
       try {
-        const cardsData = await api.getCards();
+        const cardsData = await api.getCards(getToken());
         if (Array.isArray(cardsData)) {
           setCards(cardsData);
         }
