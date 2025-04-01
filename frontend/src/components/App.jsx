@@ -288,8 +288,8 @@ function App() {
       setToken(token);
       setJwt(token);
 
-      const cards = await api.getCards();
-      setCards(cards);
+      // const cards = await api.getCards();
+      //setCards(cards);
       // Redirect and clean state
       navigate("/");
       setIsLoggedIn(true);
