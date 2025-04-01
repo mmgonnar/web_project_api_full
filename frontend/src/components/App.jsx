@@ -115,7 +115,7 @@ function App() {
       console.error("Error handling like:", error);
     }
   };
-
+  //TODO
   // const fetchUserEmail = async () => {
   //   try {
   //     const data = await auth.getUserEmail();
@@ -246,7 +246,7 @@ function App() {
       setIsSuccess(false);
       return setErrorMessage("Passwords do not match!");
     }
-    // -----> Password validation pattern
+    // * -----> Password validation pattern
     // if (!passwordPattern.test(password)) {
     //   setIsOpen(true);
     //   setIsSuccess(false);
@@ -255,7 +255,7 @@ function App() {
     //   );
     // }
 
-    //-----> Try this later
+    //* -----> Try this later
     //tryCatch(auth.register, "");
 
     try {
