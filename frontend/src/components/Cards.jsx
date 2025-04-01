@@ -3,7 +3,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 //import card from "../../../backend/models/card";
 
 const Cards = (props) => {
-  const { currentUser, cards } = useContext(CurrentUserContext);
+  const { currentUser, cards = [] } = useContext(CurrentUserContext);
 
   console.log(cards, "card");
   console.log(currentUser, "currentUser");
