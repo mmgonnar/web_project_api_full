@@ -1,7 +1,8 @@
 class Api {
   constructor({ address, token }) {
     this._url = address;
-    this._token = localStorage.getItem("jwt");
+    //this._token = localStorage.getItem("jwt");
+    //this._token = localStorage.getItem("jwt");
   }
 
   setToken(token) {
@@ -19,10 +20,10 @@ class Api {
     });
   }
 
-  getCards() {
+  getCards(token) {
     return fetch(this._url + "/cards", {
       headers: {
-        Authorization: `Bearer ${this._token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     })
