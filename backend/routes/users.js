@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 //const auth = require("../middleware/auth.js");
 const { celebrate, Joi } = require("celebrate");
-const { userValidationSchema } = require("../models/user");
+const {
+  userValidationSchema,
+  updateUserValidationSchema,
+} = require("../models/user");
 
 const {
   getUsers,
@@ -24,7 +27,7 @@ router.delete("/users/me", deleteUser);
 router.patch(
   "/users/me",
   celebrate({
-    body: userValidationSchema,
+    body: updateUserValidationSchema,
   }),
   updateUser
 );
