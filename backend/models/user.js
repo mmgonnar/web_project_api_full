@@ -65,8 +65,14 @@ const userValidationSchema = Joi.object().keys({
   password: Joi.string().required().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
 });
 
+const updateUserValidationSchema = Joi.object().keys({
+  name: Joi.string().min(2).max(30).default("Jacques Cousteau"),
+  about: Joi.string().min(2).max(30).default("An awesome explorer!"),
+});
+
 //Joi.string().required().custom(validateUrl);
 
 module.exports = mongoose.model("user", userSchema);
 
 module.exports.userValidationSchema = userValidationSchema;
+module.exports.updateUserValidationSchema = updateUserValidationSchema;

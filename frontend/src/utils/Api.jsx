@@ -112,7 +112,7 @@ class Api {
 const api = new Api({
   address:
     process.env.NODE_ENV === "development"
-      ? "http://localhost:3001"
+      ? "http://localhost:3000"
       : "https://api.sudoa.crabdance.com",
 });
 
