@@ -24,12 +24,6 @@ const getUserById = async (req, res, next) => {
         throw error;
       });
 
-    // err.status = 404
-    // if (!user) {
-    //   const error = new Error("");
-    //   error.status = 404;
-    //   throw error;
-    // }
     res.json(user);
   } catch (err) {
     req.type = "user";
