@@ -4,6 +4,10 @@ const allowedOrigins = [
   "https://sudoa.crabdance.com",
   "https://api.sudoa.crabdance.com",
   "https://www.sudoa.crabdance.com",
+<<<<<<< HEAD
+=======
+  "http://localhost:5173",
+>>>>>>> develop
 ];
 
 const corsSettings = {
