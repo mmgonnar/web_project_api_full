@@ -4,7 +4,9 @@ const Card = require("../models/card");
 
 const getUsers = async (req, res, next) => {
   try {
-    const users = await User.findOne().orFail(new Error("document not found"));
+    const users = await User.findById(req.user._id).orFail(
+      new Error("document not found")
+    );
     res.json(users);
   } catch (err) {
     req.type = "user";

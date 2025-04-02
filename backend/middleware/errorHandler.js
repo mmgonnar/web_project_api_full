@@ -17,6 +17,7 @@ module.exports = (err, req, res, next) => {
     },
   };
   const message = errorMessages[reqType][statusCode] || "Unknown error.";
+  console.log(err);
   console.log(errorMessages[reqType][statusCode], "errHandler");
 
   res.status(statusCode).json({ status: "error", message: message });
