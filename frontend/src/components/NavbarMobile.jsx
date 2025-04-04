@@ -1,27 +1,10 @@
 import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-//import { removeToken } from "../utils/token";
 
 const NavbarMobile = ({ isOpen, setIsMenuOpen, showCloseButton = true }) => {
-  const {
-    setIsLoggedIn,
-    setCurrentUser,
-    userEmail,
-    setUserEmail,
-    handleLogout,
-  } = useContext(CurrentUserContext);
-  const navigate = useNavigate();
+  const { userEmail, handleLogout } = useContext(CurrentUserContext);
   const location = useLocation();
-
-  // function handleLogout() {
-  //   setIsMenuOpen(false);
-  //   setIsLoggedIn(false);
-  //   navigate("/signin");
-  //   removeToken();
-  //   setCurrentUser({});
-  //   setUserEmail("");
-  // }
 
   return (
     <>

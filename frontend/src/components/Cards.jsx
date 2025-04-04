@@ -1,18 +1,12 @@
 import React, { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-//import card from "../../../backend/models/card";
 
 const Cards = (props) => {
   const { currentUser, cards = [] } = useContext(CurrentUserContext);
 
   console.log(cards, "card");
   console.log(currentUser, "currentUser");
-  // if (currentUser && (!cards || cards.length === 0)) {
-  //   return <p className="cards__message">No hay tarjetas disponibles</p>;
-  // }
 
-  //if (!currentUser) return null;
-  //const isOwn = card.owner._id === currentUser._id;
   return (
     <div className="cards" id="cards-template">
       {cards

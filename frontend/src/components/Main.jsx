@@ -74,7 +74,6 @@ const Main = (props) => {
       {props.isConfirmationPopupOpen && (
         <ConfirmationPopup
           isOpened={props.isConfirmationPopupOpen}
-          //onConfirmationDelete={props.onConfirmDelete}
           onClose={props.onClose}
           onCardDelete={props.onCardDelete}
           onConfirmDelete={props.onConfirmDelete}
