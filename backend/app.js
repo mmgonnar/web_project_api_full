@@ -22,9 +22,6 @@ mongoose.connect(DATABASE_URL).then(() => {
 });
 
 //CORS
-//app.use(cors(corsSettings));
-//app.options("*", cors(corsSettings));
-app.use(cors("*"));
 app.use(cors(corsSettings));
 
 //Middleware to parse JSON
