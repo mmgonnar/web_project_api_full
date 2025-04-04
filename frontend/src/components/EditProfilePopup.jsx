@@ -69,7 +69,7 @@ const EditProfilePopup = (props) => {
             className="popup__input popup__input-name"
             placeholder="Name"
             minLength="2"
-            maxLength="40"
+            maxLength="30"
             required
             autoComplete="on"
             onChange={handleChangeName}
@@ -85,7 +85,7 @@ const EditProfilePopup = (props) => {
             className="popup__input popup__input-job"
             placeholder="Job"
             minLength="2"
-            maxLength="200"
+            maxLength="30"
             required
             autoComplete="on"
             onChange={handleChangeDescription}
