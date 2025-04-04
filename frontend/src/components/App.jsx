@@ -23,7 +23,6 @@ function App() {
   const [isConfirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [cards, setCards] = useState([]);
-  //const [userData, setUserData] = useState({ username: "", email: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     name: "",
@@ -37,11 +36,10 @@ function App() {
   const [userEmail, setUserEmail] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [jwt, setJwt] = useState(getToken());
-  //const { setCurrentUser, setCards } = useContext(CurrentUserContext);
 
   const navigate = useNavigate();
-  // const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+  //TODO
   // const tryCatch = async (callback, errorMessage) => {
   //   try {
   //     //await auth.register(email, password, confirmPassword, name, link);
@@ -288,8 +286,6 @@ function App() {
       setToken(token);
       setJwt(token);
 
-      // const cards = await api.getCards();
-      //setCards(cards);
       // Redirect and clean state
       navigate("/");
       setIsLoggedIn(true);
@@ -308,7 +304,7 @@ function App() {
     setIsOpen(false);
   };
 
-  // -----> Clean code and use it as a prop
+  //* -----> Clean code and use it as a prop
   function handleLogout({ token }) {
     setIsLoggedIn(false);
     navigate("/signin");

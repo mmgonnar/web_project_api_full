@@ -1,26 +1,10 @@
 import React, { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-//import { removeToken } from "../utils/token";
 
 const NavbarDesktop = () => {
-  const {
-    setIsLoggedIn,
-    setCurrentUser,
-    userEmail,
-    setUserEmail,
-    handleLogout,
-  } = useContext(CurrentUserContext);
+  const { userEmail, handleLogout } = useContext(CurrentUserContext);
   const location = useLocation();
-  const navigate = useNavigate(CurrentUserContext);
-
-  // function handleLogout({ token }) {
-  //   setIsLoggedIn(false);
-  //   navigate("/signin");
-  //   removeToken();
-  //   setCurrentUser({});
-  //   setUserEmail("");
-  // }
 
   return (
     <>

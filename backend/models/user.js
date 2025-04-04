@@ -70,16 +70,7 @@ const updateUserValidationSchema = Joi.object().keys({
   about: Joi.string().min(2).max(30).default("An awesome explorer!"),
 });
 
-const userEmailValidationSchema = Joi.object().keys({
-  email: Joi.string()
-    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
-    .required(),
-});
-
-//Joi.string().required().custom(validateUrl);
-
 module.exports = mongoose.model("user", userSchema);
 
 module.exports.userValidationSchema = userValidationSchema;
 module.exports.updateUserValidationSchema = updateUserValidationSchema;
-module.exports.userEmailValidationSchema = userEmailValidationSchema;
