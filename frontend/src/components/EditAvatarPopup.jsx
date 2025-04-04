@@ -45,6 +45,7 @@ const EditAvatarPopup = (props) => {
             className="popup__input popup__input-image"
             placeholder="Image URL"
             minLength="6"
+            maxLength="30"
             required
             autoComplete="on"
             onChange={handleUpdateLink}

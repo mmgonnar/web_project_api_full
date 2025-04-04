@@ -1,15 +1,26 @@
 class Api {
-  constructor({ address, token }) {
+  constructor({ address }) {
     this._url = address;
-    //this._token = localStorage.getItem("jwt");
-    //this._token = localStorage.getItem("jwt");
   }
 
   setToken(token) {
     this._token = token;
   }
 
+  //?
+  // _makeRequest(url, method) {
+  //   const options = {
+  //     method,
+  //     headers: {
+  //       Authorization: `Bearer ${this._token}`,
+  //       "Content-Type": "application/json",
+  //     },
+  //   };
+  //   return fetch(`${this._url}${url}`, options);
+  // }
+
   getUserInfo() {
+    return this._makeRequest(`${this.baseUrl}/cards`);
     return fetch(this._url + "/users/me", {
       headers: {
         Authorization: `Bearer ${this._token}`,
@@ -19,6 +30,11 @@ class Api {
       return response.json();
     });
   }
+
+  //TODO
+  // getCards() {
+  //   return this._makeRequest(`${this.baseUrl}/cards`);
+  // }
 
   getCards(token) {
     return fetch(this._url + "/cards", {
@@ -33,6 +49,10 @@ class Api {
 
       .catch((error) => console.log(error));
   }
+  //?
+  // updateUser(name, job) {
+  //   return this._makeRequest("/users/me", "PATCH", { name, about: job });
+  // }
 
   updateUser(name, job) {
     return fetch(this._url + "/users/me", {
@@ -76,7 +96,6 @@ class Api {
   }
 
   deleteCard(idCard) {
-    console.log(idCard, "xxxxxx");
     return fetch(this._url + "/cards/" + idCard, {
       headers: {
         Authorization: `Bearer ${this._token}`,
