@@ -5,7 +5,6 @@ require("dotenv").config();
 //const errorHandler = require("../middleware/errorHandler");
 
 const { JWT_SECRET = "secret-token" } = process.env;
-console.log(JWT_SECRET);
 
 const login = async (req, res, next) => {
   try {

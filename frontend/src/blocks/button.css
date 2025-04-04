@@ -7,14 +7,14 @@
 }
 
 .button_edit {
-  background: url(../../public/icons/edit_button.svg) no-repeat center;
+  background: url(../icons/edit_button.svg) no-repeat center;
   width: 24px;
   height: 24px;
   border: 1px solid #fff;
 }
 
 .button_edit-avatar {
-  background: url(../../public/icons/edit_avatar_button.svg);
+  background: url(../icons/edit_avatar_button.svg);
   transition: 0.3s;
   width: 26px;
   height: 26px;
@@ -32,7 +32,7 @@
 }
 
 .button_add {
-  background: url(../../public/icons/add_button.svg) no-repeat center;
+  background: url(../icons/add_button.svg) no-repeat center;
   width: 288px;
   height: 50px;
   border-radius: 2px;
@@ -40,7 +40,7 @@
 }
 
 .button_like {
-  background: url(../../public/icons/like.svg) no-repeat center;
+  background: url(../icons/like.svg) no-repeat center;
   width: 21px;
   height: 19px;
   display: flex;
@@ -50,7 +50,7 @@
 }
 
 .button_like.liked {
-  background: url(../../public/icons/like-black.svg);
+  background: url(../icons/like-black.svg);
   opacity: 1;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .button_close {
-  background: url(../../public/icons/close_button.svg) no-repeat center;
+  background: url(../icons/close_button.svg) no-repeat center;
   width: 24px;
   height: 24px;
   border: none;
@@ -89,7 +89,7 @@
 }
 
 .button_delete {
-  background: url(../../public/icons/trash_button.svg);
+  background: url(../icons/trash_button.svg);
   position: absolute;
   top: 18px;
   right: 15px;

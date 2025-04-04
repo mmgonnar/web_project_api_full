@@ -56,7 +56,7 @@
   z-index: 1000; */
 }
 .navbar__mobile-button {
-  background: url(../../public/icons/hamburger.svg);
+  background: url(../icons/hamburger.svg);
   width: 18px;
   height: 16px;
   border: none;

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
-import unsuccessful from "../../public/icons/unsuccessful.svg";
-import successful from "../../public/icons/successful.svg";
+import unsuccessful from "../icons/unsuccessful.svg";
+import successful from "../icons/successful.svg";
 
 const InfoTooltip = ({ onOpen, onSuccess, errorMessage, onClose }) => {
   const popupRef = useRef(null);
