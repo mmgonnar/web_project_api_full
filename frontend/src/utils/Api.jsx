@@ -8,16 +8,16 @@ class Api {
   }
 
   //?
-  // _makeRequest(url, method) {
-  //   const options = {
-  //     method,
-  //     headers: {
-  //       Authorization: `Bearer ${this._token}`,
-  //       "Content-Type": "application/json",
-  //     },
-  //   };
-  //   return fetch(`${this._url}${url}`, options);
-  // }
+  _makeRequest(url, method, body) {
+    const options = {
+      method,
+      headers: {
+        Authorization: `Bearer ${this._token}`,
+        "Content-Type": "application/json",
+      },
+    };
+    return fetch(`${this._url}${url}`, options);
+  }
 
   getUserInfo() {
     return this._makeRequest(`${this.baseUrl}/cards`);
@@ -31,10 +31,10 @@ class Api {
     });
   }
 
-  //TODO
-  // getCards() {
-  //   return this._makeRequest(`${this.baseUrl}/cards`);
-  // }
+  //?
+  getCards() {
+    return this._makeRequest(`${this.baseUrl}/cards`);
+  }
 
   getCards(token) {
     return fetch(this._url + "/cards", {
@@ -51,7 +51,14 @@ class Api {
   }
   //?
   // updateUser(name, job) {
-  //   return this._makeRequest("/users/me", "PATCH", { name, about: job });
+  //   return this._makeRequest(
+  //     "/users/me",
+  //     "PATCH",
+  //     JSON.stringify({
+  //       name,
+  //       about: job,
+  //     })
+  //   );
   // }
 
   updateUser(name, job) {
@@ -103,7 +110,7 @@ class Api {
       },
       method: "DELETE",
     }).then((response) => {
-      console.log(response, "zzzzzz"), response.json();
+      console.log(response), response.json();
     });
   }
 
