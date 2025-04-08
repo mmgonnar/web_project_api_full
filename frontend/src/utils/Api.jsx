@@ -8,19 +8,19 @@ class Api {
   }
 
   //?
-  _makeRequest(url, method, body) {
-    const options = {
-      method,
-      headers: {
-        Authorization: `Bearer ${this._token}`,
-        "Content-Type": "application/json",
-      },
-    };
-    return fetch(`${this._url}${url}`, options);
-  }
+  // _makeRequest(url, method, body) {
+  //   const options = {
+  //     method,
+  //     headers: {
+  //       Authorization: `Bearer ${this._token}`,
+  //       "Content-Type": "application/json",
+  //     },
+  //   };
+  //   return fetch(`${this._url}${url}`, options);
+  // }
 
   getUserInfo() {
-    return this._makeRequest(`${this.baseUrl}/cards`);
+    //return this._makeRequest(`${this.baseUrl}/cards`);
     return fetch(this._url + "/users/me", {
       headers: {
         Authorization: `Bearer ${this._token}`,
@@ -31,10 +31,10 @@ class Api {
     });
   }
 
-  //?
-  getCards() {
-    return this._makeRequest(`${this.baseUrl}/cards`);
-  }
+  //?d
+  // getCards() {
+  //   return this._makeRequest(`${this.baseUrl}/cards`);
+  // }
 
   getCards(token) {
     return fetch(this._url + "/cards", {
