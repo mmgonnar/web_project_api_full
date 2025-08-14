@@ -3,7 +3,7 @@ import { getToken } from "./token";
 export const BASE_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
-    : "https://api.sudoa.crabdance.com";
+    : "https://18-web-project-api-full-backend.vercel.app";
 
 const handleResponse = async (response) => {
   const data = await response.json();
