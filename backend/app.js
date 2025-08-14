@@ -23,7 +23,7 @@ mongoose.connect(DATABASE_URL).then(() => {
 });
 
 //CORS
-app.use(cors(corsSettings));
+app.use(cors("*"));
 
 //Middleware to parse JSON
 app.use(express.json());
@@ -58,3 +58,5 @@ app.use(errorHandler);
 app.listen(PORT, () => {
   console.log(`Server listening in http://localhost:${PORT}`);
 });
+
+module.exports = app;
