@@ -139,7 +139,7 @@ const api = new Api({
   address:
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
-      : "https://api.sudoa.crabdance.com",
+      : "https://18-web-project-api-full-backend.vercel.app",
 });
 
 export default api;
