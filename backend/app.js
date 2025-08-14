@@ -15,7 +15,8 @@ const corsSettings = require("./middleware/cors");
 
 const mongoose = require("mongoose");
 
-const DATABASE_URL = "mongodb://127.0.0.1:27017/aroundb";
+const DATABASE_URL =
+  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/aroundb";
 
 mongoose.connect(DATABASE_URL).then(() => {
   console.log("Server connected");
