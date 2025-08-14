@@ -18,7 +18,7 @@ const mongoose = require("mongoose");
 const DATABASE_URL =
   process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/aroundb";
 
-mongoose.connect(DATABASE_URL).then(() => {
+mongoose.connect(DATABASE_URL, { serverSelectionTimeoutMS: 30000 }).then(() => {
   console.log("Server connected");
 });
 
