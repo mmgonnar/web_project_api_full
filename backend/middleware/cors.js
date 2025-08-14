@@ -6,6 +6,7 @@ const allowedOrigins = [
   "https://www.sudoa.crabdance.com",
   "http://localhost:5173",
   "https://18-web-project-api-full-frontend.vercel.app",
+  "https://18-web-project-api-full-backend.vercel.app",
 ];
 
 const corsSettings = {
