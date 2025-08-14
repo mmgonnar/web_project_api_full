@@ -23,8 +23,8 @@ mongoose.connect(DATABASE_URL, { serverSelectionTimeoutMS: 30000 }).then(() => {
 });
 
 //CORS
-app.use(cors(corsSettings));
-app.options("*", cors(corsSettings));
+app.use(cors("*"));
+//app.options("*", cors(corsSettings));
 
 //Middleware to parse JSON
 app.use(express.json());
