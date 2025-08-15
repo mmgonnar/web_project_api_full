@@ -18,13 +18,18 @@ const mongoose = require("mongoose");
 const DATABASE_URL =
   process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/aroundb";
 
-mongoose.connect(DATABASE_URL, { serverSelectionTimeoutMS: 30000 }).then(() => {
-  console.log("Server connected");
-});
+mongoose
+  .connect(DATABASE_URL, { serverSelectionTimeoutMS: 30000 })
+  .then(() => {
+    console.log("Server connected");
+  })
+  .catch((err) => {
+    console.log("Database connection error:", err.message);
+  });
 
 //CORS
-app.use(cors("*"));
-//app.options("*", cors(corsSettings));
+app.use(cors(corsSettings));
+app.options("*", cors(corsSettings));
 
 //Middleware to parse JSON
 app.use(express.json());
@@ -36,11 +41,6 @@ app.get("/", (req, res) => {
   res.sendStatus(200);
 });
 
-app.get("/crash-test", () => {
-  setTimeout(() => {
-    throw new Error("El servidor va a caer");
-  }, 0);
-});
 //auth routes
 app.use("/", authRoutes);
 app.use(auth);
