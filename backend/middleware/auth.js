@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET = "secret-token" } = process.env;
 
 module.exports = (req, res, next) => {
-  // Skip auth check for OPTIONS requests (CORS preflight)
+  
   if (req.method === "OPTIONS") {
     return next();
   }

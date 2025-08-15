@@ -46,13 +46,13 @@ const createUser = async (req, res, next) => {
 
     const savedUser = await newUser.save();
 
-    const defaultCard = new Card({
-      name: "Welcome!",
-      link: "https://www.pushengage.com/wp-content/uploads/2022/02/Best-Website-Welcome-Message-Examples.png",
-      owner: savedUser._id,
-    });
+    // const defaultCard = new Card({
+    //   name: "Welcome!",
+    //   link: "https://www.pushengage.com/wp-content/uploads/2022/02/Best-Website-Welcome-Message-Examples.png",
+    //   owner: savedUser._id,
+    // });
 
-    await defaultCard.save();
+    //await defaultCard.save();
     res.status(201).json(savedUser);
   } catch (err) {
     req.type = "user";
