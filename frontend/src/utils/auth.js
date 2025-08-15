@@ -1,6 +1,6 @@
 import { getToken } from "./token";
 
-// Updated backend URL for production
+// Updated backend URL for production - v2
 export const BASE_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
