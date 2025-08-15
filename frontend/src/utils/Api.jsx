@@ -139,7 +139,7 @@ const api = new Api({
   address:
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
-      : "https://18-web-project-api-full-backend.vercel.app",
+      : "https://18-web-project-api-full-backend-bz363kvvj.vercel.app",
 });
 
 export default api;
