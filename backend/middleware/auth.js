@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET = "secret-token" } = process.env;
 
 module.exports = (req, res, next) => {
+  
   if (req.method === "OPTIONS") {
     return next();
   }
