@@ -135,6 +135,7 @@ class Api {
   }
 }
 
+// Updated backend URL for production - v2
 const api = new Api({
   address:
     process.env.NODE_ENV === "development"
