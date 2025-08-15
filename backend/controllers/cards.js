@@ -81,6 +81,7 @@ const addLike = async (req, res, next) => {
       { new: true }
     )
       .populate("likes")
+      .populate("owner")
       .orFail(new Error("Card not found"));
 
     res.json(addedLike);
@@ -96,7 +97,10 @@ const removeLike = async (req, res, next) => {
       req.params.cardId,
       { $pull: { likes: req.user._id } },
       { new: true }
-    ).orFail(new Error("Card not found"));
+    )
+      .populate("likes")
+      .populate("owner")
+      .orFail(new Error("Card not found"));
 
     res.json(removedLike);
   } catch (err) {
