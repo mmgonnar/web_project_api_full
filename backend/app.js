@@ -41,6 +41,16 @@ app.get("/", (req, res) => {
   res.sendStatus(200);
 });
 
+//keep-alive for MongoDB Atlas free tier
+app.get("/keep-alive", async (req, res) => {
+  try {
+    await mongoose.connection.db.admin().command({ ping: 1 });
+    res.status(200).json({ status: "ok" });
+  } catch (err) {
+    res.status(503).json({ status: "error", message: err.message });
+  }
+});
+
 //auth routes
 app.use("/", authRoutes);
 app.use(auth);

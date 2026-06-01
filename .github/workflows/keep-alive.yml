@@ -1,0 +1,13 @@
+name: MongoDB Atlas Keep Alive
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping_mongodb:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send a request to the keep-alive endpoint
+        run: curl -X GET "${{ secrets.BACKEND_URL }}/keep-alive"
